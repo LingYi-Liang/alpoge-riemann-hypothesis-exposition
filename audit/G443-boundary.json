@@ -1,0 +1,784 @@
+{
+  "examined": [
+    {
+      "declarations": 146,
+      "module": "GroundTheory.AutomorphicForms.RealGroupsLie"
+    },
+    {
+      "declarations": 39,
+      "module": "GroundTheory.AutomorphicForms.GKModules.LieAlgebra"
+    },
+    {
+      "declarations": 125,
+      "module": "GroundTheory.AutomorphicForms.UnitaryRepresentations.IsInvariantIffCommuteStarProjection"
+    },
+    {
+      "declarations": 107,
+      "module": "GroundTheory.AutomorphicForms.GKModules.SmoothVectors"
+    },
+    {
+      "declarations": 58,
+      "module": "GroundTheory.AutomorphicForms.GKModules.RightRegular"
+    },
+    {
+      "declarations": 18,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.ContDiffCompCoordEquiv"
+    },
+    {
+      "declarations": 19,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.ExpChart"
+    },
+    {
+      "declarations": 6,
+      "module": "GroundTheory.AutomorphicForms.DixmierMalliavinBasic"
+    },
+    {
+      "declarations": 42,
+      "module": "GroundTheory.AutomorphicForms.DixmierMalliavinHaarCoord"
+    },
+    {
+      "declarations": 15,
+      "module": "GroundTheory.AutomorphicForms.DixmierMalliavinHaar"
+    },
+    {
+      "declarations": 8,
+      "module": "GroundTheory.AutomorphicForms.DixmierMalliavinHaarDensity"
+    },
+    {
+      "declarations": 10,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.ExpHaar"
+    },
+    {
+      "declarations": 47,
+      "module": "GroundTheory.AutomorphicForms.HilbertSchmidt"
+    },
+    {
+      "declarations": 33,
+      "module": "GroundTheory.AutomorphicForms.HilbertSchmidtKernel"
+    },
+    {
+      "declarations": 14,
+      "module": "GroundTheory.AutomorphicForms.HilbertSchmidtCompact"
+    },
+    {
+      "declarations": 84,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp"
+    },
+    {
+      "declarations": 43,
+      "module": "GroundTheory.AutomorphicForms.GKModules.ZKFinite"
+    },
+    {
+      "declarations": 18,
+      "module": "GroundTheory.AutomorphicForms.GKModules.Casimir"
+    },
+    {
+      "declarations": 41,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.CartanBasis"
+    },
+    {
+      "declarations": 28,
+      "module": "GroundTheory.AutomorphicForms.HarishChandraRegularity"
+    },
+    {
+      "declarations": 14,
+      "module": "GroundTheory.AutomorphicForms.AutomorphicFormSpaces.GKStableConv"
+    }
+  ],
+  "references": [
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dList_perm",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.fderiv_fderiv_apply_comm",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir._proof_1",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdir.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList._f",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList._f",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT_zero",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList._f",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList._f",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT_cons",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.fderiv_apply_eq_sum",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.fderiv_apply_eq_sum",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.dT_eq_dList",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdirList_eq_map",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdirList_eq_map",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mdirList_eq_map",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_idCoeff",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_idCoeff",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT_zero",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.contDiff_pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT_cons",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.vfOp_tupleOp_eq",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pd",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_shiftCoeff",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_shiftCoeff",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.analyticOnNhd_fderiv_apply",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.eq_sum_ev",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.eq_sum_ev",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prinSymbol.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mpow",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prinSymbol.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prinSymbol.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prinSymbol.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prod_eq_mpow",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mpow",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prod_eq_mpow",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mpow",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.prod_eq_mpow",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mpow.eq_1",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.contDiff_dList._f",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.contDiff_fderiv_apply",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_add",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_raiseCoeff",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mabs_tupleCount",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.mabs_tupleCount",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pderiv",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pderiv_eq_dT'",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pderiv",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.dT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.ev",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT.eq_1",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoCalc",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.pdT_eq_pderiv",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdir._proof_1",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.length_mdirList",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.ofFn_mdir",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_sum",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp.eq_1",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.tupleOp_smul",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_vfOp_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pdT",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoBasic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mpow",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.pderiv",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity.TupleOp",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "type"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_elliptic_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.analyticAt_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.analyticOn_of_elliptic",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.AnalyticHypoelliptic",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.analyticAt_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.analyticAt_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.analyticAt_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_eq_conv_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_eq_conv_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.exists_parametrix",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticParametrix",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_eq_conv_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_eq_conv_of_aeval_laplacian_eq_zero",
+      "client_module": "GroundTheory.AutomorphicForms.HarishChandraRegularity",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_kernel_eq_conv_of_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.AutomorphicFormSpaces.GKStableConv",
+      "provider": "GroundTheory.Automorphic.Sobolev.diffOp",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_kernel_eq_conv_of_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.AutomorphicFormSpaces.GKStableConv",
+      "provider": "GroundTheory.Automorphic.Sobolev.exists_parametrix",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticParametrix",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_kernel_eq_conv_of_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.AutomorphicFormSpaces.GKStableConv",
+      "provider": "GroundTheory.Automorphic.Sobolev.prinSymbol",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    },
+    {
+      "client": "GroundTheory.Automorphic.IsExpLieAlgebra.exists_kernel_eq_conv_of_aeval_laplacian",
+      "client_module": "GroundTheory.AutomorphicForms.AutomorphicFormSpaces.GKStableConv",
+      "provider": "GroundTheory.Automorphic.Sobolev.mabs",
+      "provider_module": "GroundTheory.AutomorphicForms.PartialDifferential.EllipticDiffOp",
+      "site": "value"
+    }
+  ],
+  "axioms": {
+    "GroundTheory.Automorphic.Sobolev.analyticOn_of_elliptic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "GroundTheory.Automorphic.Sobolev.exists_parametrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "GroundTheory.Automorphic.Sobolev.exists_diffOp_eq_tupleOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "GroundTheory.Automorphic.IsExpLieAlgebra.analyticAt_of_aeval_laplacian_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "GroundTheory.Automorphic.IsExpLieAlgebra.exists_eq_conv_of_aeval_laplacian_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "GroundTheory.Automorphic.IsExpLieAlgebra.exists_kernel_eq_conv_of_aeval_laplacian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "release_sha256": "9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "lean": "Lean (version 4.33.1, x86_64-w64-windows-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "queried_scope": "The 21 release modules outside G443 in the combined 44-module closure of the three named consumers. The prose proof is justified by the cited mathematics."
+}

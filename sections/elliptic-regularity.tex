@@ -1,0 +1,168 @@
+\section{Elliptic operators in exponential coordinates}\label{sec:g443}
+
+The archimedean argument uses two local facts about an elliptic differential
+operator. Analytic coefficients force its smooth null solutions to be analytic.
+Smooth coefficients already give a compactly supported formula for evaluating
+a null solution at a point. The kernel in the second assertion must be chosen
+before the solution.
+
+\subsection{Coordinates and principal symbols}
+Let \(n,m\) be nonnegative integers, let \(\Omega\subset\mathbb R^n\) be open, and let \(A\) be a
+finite set of multi-indices of length \(|\alpha|\leq m\). The coefficients are
+complex-valued functions of real variables. Write
+\begin{equation}\label{eq:g443-operator}
+ Pu(x)=\sum_{\alpha\in A}a_\alpha(x)\partial^\alpha u(x),\qquad
+ p_m(x,\xi)=\sum_{\substack{\alpha\in A\\|\alpha|=m}}a_\alpha(x)\xi^\alpha .
+\end{equation}
+Ellipticity means \(p_m(x,\xi)\ne0\) for \(x\in\Omega\) and real
+\(\xi\ne0\). With the convention \(\partial_j\mapsto i\xi_j\), the top
+symbol is \(i^m p_m\), with the same characteristic set.
+
+Here is the passage from the ordered derivatives used in a Lie chart to
+\eqref{eq:g443-operator}. For a word \(J=(j_1,\ldots,j_k)\) in the coordinate
+directions \(e_1,\ldots,e_n\), put
+\[
+ u_J=D^ku[e_{j_1},\ldots,e_{j_k}],\qquad
+ \nu(J)_i=\#\{r:j_r=i\}.
+\]
+The empty word gives \(u\). For smooth \(u\) and arbitrary fixed vectors
+\(v_1,\ldots,v_k\), the function \(D^ku[v_1,\ldots,v_k]\) is smooth.
+Its derivative along \(v_0\) is \(D^{k+1}u[v_0,v_1,\ldots,v_k]\).
+For a multi-index \(\alpha\), the coordinate list consists of
+\(\alpha_i\) copies of \(e_i\), in increasing order of \(i\). Its length
+is \(|\alpha|=\sum_i\alpha_i\). Evaluation on this list defines
+\(\partial^\alpha u\), and \(\xi^\alpha=\prod_i\xi_i^{\alpha_i}\).
+Symmetry permits any permutation, so \(\partial_i u_J=u_{(i,J)}\) and
+\(u_J=\partial^{\nu(J)}u\).
+For an ordered operator \(\sum_{k=0}^m\sum_{|J|=k}c_J u_J\), take
+\[
+ b_\alpha(x)=\sum_{\nu(J)=\alpha}c_J(x) \quad (|\alpha|\leq m).
+\]
+This finite regrouping preserves the operator on smooth functions and
+preserves its degree-\(m\) symbol at every \(x,\xi\), since
+\(\prod_{r=1}^m\xi_{j_r}=\xi^{\nu(J)}\). It preserves analyticity of the
+coefficients on a neighbourhood of each point where all the \(c_J\) have
+this property, even if the designated set of points is arbitrary. The
+coefficients for different orderings of a word may be different.
+For a vector field \(V=\sum_i v_i\partial_i\) the product rule gives
+\[
+ V(c_Ju_J)=(Vc_J)u_J+c_J\sum_i v_i u_{(i,J)} .
+\]
+Thus composition on the left by \(V\) multiplies the top symbol by
+\(\sum_i v_i(x)\xi_i\). Derivatives of coefficients enter the lower orders.
+This identity uses only the value of \(V\) at the point and the formula
+\(L(v)=\sum_i v_i L(e_i)\) for a real-linear differential \(L\).
+If the \(v_i\) and \(c_J\) are
+analytic on a neighbourhood, the displayed coefficients are analytic there.
+
+\subsection{The two local results}
+\begin{proposition}[Interior analyticity]\label{prop:g443-analytic}
+Suppose \(a_\alpha\) is real analytic on \(\Omega\) for every \(\alpha\in A\),
+and \(P\) is elliptic there. If \(u\) is complex-valued, smooth on \(\Omega\)
+and \(Pu=0\) on \(\Omega\), then \(u\) is real analytic on \(\Omega\).
+\end{proposition}
+\begin{proof}
+If \(n=0\), the domain is empty or a point. If \(n>0\) and \(m=0\),
+ellipticity makes the multiplication coefficient nonzero at each point,
+so \(u=0\) there. For \(m>0\), regard \(u\) as a distribution locally.
+Analytic microlocal elliptic regularity gives
+\[
+ \mathrm{WF}_{\!A}(u)\subset
+ \mathrm{WF}_{\!A}(Pu)\cup
+ \{(x,\xi):x\in\Omega,\ \xi\ne0,\ p_m(x,\xi)=0\}
+\]
+by H\"ormander~\cite[Thm.~8.6.1]{g443-hormander}.
+Both sets on the right are empty. The projection of the analytic wavefront
+set is the analytic singular support. The resulting analytic representative
+equals the given smooth function pointwise.
+\end{proof}
+
+\begin{proposition}[Localized evaluation]\label{prop:g443-kernel}
+Suppose \(n>0,\ m\geq1,\ n<2m\). Let the \(a_\alpha\) be smooth on
+\(\Omega\), and \(P\) elliptic there. For every open \(U\subseteq\Omega\)
+and \(x_0\in U\), there are complex-valued functions \(E,\beta\) on
+\(\mathbb R^n\) with
+\[
+ E\in L^1(\mathbb R^n)\cap C^\infty(\mathbb R^n\setminus\{x_0\}),\quad
+ \beta\in C^\infty_c(\mathbb R^n),\quad
+ \operatorname{supp}E\ \cup\ \operatorname{supp}\beta\Subset U .
+\]
+For every \(\phi:\mathbb R^n\to\mathbb C\) whose restriction to \(U\) is
+smooth,
+\begin{equation}\label{eq:g443-eval}
+ \int_{\mathbb R^n} E(x)P\phi(x)\,dx
+       =\phi(x_0)-\int_{\mathbb R^n}\beta(x)\phi(x)\,dx .
+\end{equation}
+Both integrals may equivalently be evaluated over \(U\).
+\end{proposition}
+\begin{proof}
+Here the support of a function is the closure of its nonzero set, and
+\(\Subset\) denotes compact containment.
+The distribution pairing is complex bilinear. On a ball
+\(x_0\in V\Subset U\) the transpose is
+\[
+ T={}^tP,\qquad Tv=\sum_{\alpha\in A}(-\partial)^\alpha(a_\alpha v).
+\]
+In the convention of \eqref{eq:g443-operator}, its principal symbol is
+\((-1)^mp_m\). Continuity and ellipticity give a positive lower bound for
+\(|p_m|\) on \(\overline V\) times the unit sphere. The properly supported parametrix theorem
+on open sets gives \(Q\) of order \(-m\) with \(TQ=I-R\), where \(R\)
+has a smooth kernel~\cite[Cor.~7.19]{g443-grubb}. Set
+\(v=Q\delta_{x_0}\) and \(r=R\delta_{x_0}\). Then \(Tv=\delta_{x_0}-r\).
+In \(V\setminus\{x_0\}\), smooth elliptic regularity makes \(v\) smooth.
+Choose \(n/2<s<m\), possible by the dimension assumption. The Fourier
+transform of a point mass has constant absolute value, so the integral of
+\((1+|\xi|^2)^{-s}\) shows that \(\delta_{x_0}\in H^{-s}\). The local
+Sobolev mapping rule gives \(v\in H_{\mathrm{loc}}^{m-s}(V)\subset
+L^2_{\mathrm{loc}}(V)\)~\cite[\S7.4, proof of Cor.~7.20]{g443-grubb}.
+Use its smooth representative off \(x_0\) and assign any finite value at
+\(x_0\), a null set.
+
+Take \(\eta\in C^\infty_c(V)\) equal to one near \(x_0\) and extend
+\[
+        E=\eta v,\qquad \beta=\eta r-[T,\eta]v
+\]
+by zero. Compact support and Cauchy--Schwarz give \(E\in L^1\).
+The commutator is supported where \(\eta\) varies, away from \(x_0\),
+so \(\beta\) is smooth with compact support in \(V\).
+The identity \(TE=\eta Tv+[T,\eta]v=\delta_{x_0}-\beta\) gives
+\eqref{eq:g443-eval} for compactly supported smooth test functions.
+For the stated \(\phi\), take a cutoff in \(C^\infty_c(U)\) equal to one
+near \(\{x_0\}\cup\operatorname{supp}E\cup\operatorname{supp}\beta\).
+Its product with \(\phi\), extended by zero, is such a test function, and
+all three terms of \eqref{eq:g443-eval} agree with those for \(\phi\).
+\end{proof}
+
+\subsection{Return to the convolution kernels}
+In the application a fixed Lie algebra basis gives exponential coordinates
+of dimension \(d\) on a neighbourhood of the identity. The chart
+calculation supplies analytic coefficients and an elliptic principal symbol
+for a monic polynomial in the Laplacian. The chart and its Haar density
+are inputs supplied by the adjoining group-theoretic argument.
+Proposition~\ref{prop:g443-analytic} gives analyticity at the origin of the
+chart for each translated solution.
+
+For a monic polynomial \(B\) of positive degree and \(d>0\), use
+\(B^{d+1}\) in the evaluation formula. Its differential order is
+\(m=2(d+1)\deg B\), so \(d<2m\). Every \(f\) killed by \(B(\Delta)\)
+is killed by \(B(\Delta)^{d+1}\). The chart operator, its kernel \(\beta\),
+and the chart itself can all be fixed before \(f\) or the translating element
+\(g\) is chosen. Equation~\eqref{eq:g443-eval} for a translated solution
+now gives \(u(0)=\int\beta u\).
+
+More explicitly, for any prescribed identity neighbourhood choose the ball
+so that both sign choices of the exponential chart take it into that neighbourhood.
+Writing left Haar measure as \(j(x)\,dx\) in that chart, transport
+\(\beta(x)/j(x)\) and extend by zero. The density \(j\) is smooth and
+strictly positive, so the resulting \(\kappa_+\) is smooth and compactly
+supported in the prescribed neighbourhood, and
+\[
+     f(g)=\int_G f(gy)\kappa_+(y)\,d\mu(y).
+\]
+For the convention \(f(gy^{-1})\), apply the chart equation to the negated
+Lie algebra basis and use \(\exp(-X)=\exp(X)^{-1}\). Transport the resulting
+kernel using the density in the original \(y\)-chart. This gives a smooth
+\(\kappa_-\) with the same support requirement. Both formulae therefore
+allow arbitrary normalization of the fixed Haar measure.
+In dimension zero the group is discrete and
+\(\boldsymbol{1}_{\{1\}}/\mu(\{1\})\) gives both kernels.
