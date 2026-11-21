@@ -2,9 +2,9 @@
 
 The archimedean argument uses two local facts about an elliptic differential
 operator. Analytic coefficients force its smooth null solutions to be analytic.
-Smooth coefficients already give a compactly supported formula for evaluating
-a null solution at a point. The kernel in the second assertion must be chosen
-before the solution.
+For smooth coefficients and order \(m>n/2\) in positive dimension \(n\),
+a compactly supported kernel gives the value of a null solution at a point.
+The kernel must be chosen before the solution.
 
 \subsection{Coordinates and principal symbols}
 Let \(n,m\) be nonnegative integers, let \(\Omega\subset\mathbb R^n\) be open, and let \(A\) be a
@@ -62,7 +62,8 @@ and \(P\) is elliptic there. If \(u\) is complex-valued, smooth on \(\Omega\)
 and \(Pu=0\) on \(\Omega\), then \(u\) is real analytic on \(\Omega\).
 \end{proposition}
 \begin{proof}
-If \(n=0\), the domain is empty or a point. If \(n>0\) and \(m=0\),
+If \(n=0\), every function on the domain is locally constant and hence analytic.
+If \(n>0\) and \(m=0\),
 ellipticity makes the multiplication coefficient nonzero at each point,
 so \(u=0\) there. For \(m>0\), regard \(u\) as a distribution locally.
 Analytic microlocal elliptic regularity gives
@@ -72,8 +73,9 @@ Analytic microlocal elliptic regularity gives
  \{(x,\xi):x\in\Omega,\ \xi\ne0,\ p_m(x,\xi)=0\}
 \]
 by H\"ormander~\cite[Thm.~8.6.1]{g443-hormander}.
-Both sets on the right are empty. The projection of the analytic wavefront
-set is the analytic singular support. The resulting analytic representative
+Both sets on the right are empty. By Theorem~8.4.5 of the same volume,
+the projection of the analytic wavefront set is the analytic singular support.
+The resulting analytic representative
 equals the given smooth function pointwise.
 \end{proof}
 
@@ -93,7 +95,7 @@ smooth,
  \int_{\mathbb R^n} E(x)P\phi(x)\,dx
        =\phi(x_0)-\int_{\mathbb R^n}\beta(x)\phi(x)\,dx .
 \end{equation}
-Both integrals may equivalently be evaluated over \(U\).
+Both integrands are extended by zero outside \(U\).
 \end{proposition}
 \begin{proof}
 Here the support of a function is the closure of its nonzero set, and
@@ -150,19 +152,18 @@ and the chart itself can all be fixed before \(f\) or the translating element
 \(g\) is chosen. Equation~\eqref{eq:g443-eval} for a translated solution
 now gives \(u(0)=\int\beta u\).
 
-More explicitly, for any prescribed identity neighbourhood choose the ball
-so that both sign choices of the exponential chart take it into that neighbourhood.
-Writing left Haar measure as \(j(x)\,dx\) in that chart, transport
-\(\beta(x)/j(x)\) and extend by zero. The density \(j\) is smooth and
-strictly positive, so the resulting \(\kappa_+\) is smooth and compactly
-supported in the prescribed neighbourhood, and
+Let \(b:\mathbb R^d\to\mathfrak g\) be the coordinate isomorphism and put
+\(\chi_\pm(x)=\exp(\pm bx)\). Choose a ball about zero inside both ellipticity
+neighbourhoods so that both charts map it into the prescribed identity neighbourhood.
+Using the given Laplacian in each chart yields kernels \(\beta_\pm\).
+Write \(\chi_+^*d\mu=j(x)\,dx\), where \(j\) is smooth and positive.
+Define both group kernels in the positive chart by
+\(\kappa_\pm(\chi_+(x))=\beta_\pm(x)/j(x)\) and extend them by zero.
+Their supports are compactly contained in the chart, so the extensions are
+smooth. Since \(\chi_-(x)=\chi_+(x)^{-1}\), for every such \(f\) and every \(g\)
 \[
-     f(g)=\int_G f(gy)\kappa_+(y)\,d\mu(y).
+ f(g)=\int_G f(gy)\kappa_+(y)\,d\mu(y)
+     =\int_G f(gy^{-1})\kappa_-(y)\,d\mu(y).
 \]
-For the convention \(f(gy^{-1})\), apply the chart equation to the negated
-Lie algebra basis and use \(\exp(-X)=\exp(X)^{-1}\). Transport the resulting
-kernel using the density in the original \(y\)-chart. This gives a smooth
-\(\kappa_-\) with the same support requirement. Both formulae therefore
-allow arbitrary normalization of the fixed Haar measure.
 In dimension zero the group is discrete and
 \(\boldsymbol{1}_{\{1\}}/\mu(\{1\})\) gives both kernels.
