@@ -1,0 +1,459 @@
+% Compile twice with pdfLaTeX. This is a self-contained source file.
+\documentclass[letterpaper,11pt]{article}
+\usepackage[margin=.95in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,mathtools,amssymb,amsthm,microtype,booktabs,array,tabularx,longtable}
+\usepackage{xcolor}
+\usepackage[unicode,colorlinks=true,linkcolor=blue!40!black,urlcolor=blue!55!black,citecolor=blue!40!black]{hyperref}
+\usepackage{bookmark}
+\setlength{\emergencystretch}{1em}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{countlemma}{Lemma}[section]
+\renewcommand{\thecountlemma}{\thesection.\Alph{countlemma}}
+\newcommand{\mapsep}{\penalty0\hskip .45em plus .08em\relax}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\Sha}{\operatorname{Sha}}
+\newcommand{\len}{\operatorname{len}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Frob}{\operatorname{Frob}}
+\newcommand{\av}{\operatorname{av}}
+\newcommand{\Err}{\operatorname{Err}}
+\newcommand{\Dsum}{\mathfrak D}
+\newcommand{\Msum}{\mathfrak M}
+\newcommand{\Gain}{\mathcal G}
+\newcommand{\paperpage}[2]{\href{https://zenodo.org/records/24413008/files/alpoge-rh-exposition.pdf\#page=#1}{#2}}
+\newcommand{\leanrange}[4]{\href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/#1\#L#2-L#3}{#4}}
+\newcommand{\mathrange}[4]{\href{https://github.com/leanprover-community/mathlib4/blob/0df444a360eaa60ab8c11dca51a86af692955474/#1\#L#2-L#3}{#4}}
+\title{Integral theta periods and Dirichlet GRH\\[3pt]\large A condensed account of Alp\"oge's proposed argument}
+\author{}
+\date{22 November 2026}
+\hypersetup{pdftitle={Integral theta periods and Dirichlet GRH: a condensed account},pdfsubject={An abridgment of all nine sections of the exposition at Zenodo 24413008}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Local divisibility bounds the prime sum of a cyclic character family. The Archimedean height of the same iterated theta period supplies its centring term. Cohomology places both estimates on a common interval. We follow the main implications of all nine sections of the \href{https://doi.org/10.5281/zenodo.24413008}{47-page exposition}. The orbit estimates, matching theorem and simultaneous realization are used with the source's hypotheses. Appendix~\ref{sec:correspondence} locates the formal inputs and distinguishes them from the deductions given here.
+\end{abstract}
+
+\section{The assertion and the comparison}
+Levent Alp\"oge announced a formal argument developed with Claude~\cite{alpoge}. For every Dirichlet character \(\chi\bmod N\), \(N\ge1\), its asserted conclusion is \(L(s,\chi)\ne0\) for \(\Re s>1/2\), with \(s=1\) excepted for a principal character. The other assertions locate the zeros in \(0<\Re s<1\) for primitive characters and for all characters, and the nontrivial zeros of \(\zeta\). In both open-strip statements the real part is \(1/2\). The Lean statement for \(\zeta\) excludes \(1\) and the negative even integers. Mathlib assigns a value at the pole, which explains the explicit exclusion.
+
+For a primitive \(\psi\), the argument seeks arbitrarily late intervals \([Y,Y^{3/2}]\) on which a centred prime sum \(G_S(x)\) is at most \(x^{1/2+9\epsilon}\). As in Stepanov's method~\cite{stepanov,bombieri}, one compares a multiplicity with a global size bound. At each scale and shift \(u_0\), let \(\Dsum\) be the weighted prime-power count, \(\Gain\) the retained divisibility of a chain of \(m\) lifts, and \(\Msum\) the explicit main term. The identity
+\[
+ \Dsum-\Re\Msum=(\Dsum-\Gain)+(\Gain-\Re\Msum)
+\]
+separates the finite-place estimate of \S\ref{sec:div} from the slope estimate of \S\ref{sec:height}. The coefficient of \(G_S\) grows linearly with \(m\). The terminal period is paid for once. This distinction produces the two leading costs \(x/m\) and \(m\).
+
+\section{The cyclic family and the analytic implication}\label{sec:analytic}
+Let \(M\) be the conductor of \(\psi\), \(o\) its order and \(S\) the set of primitive characters inducing its powers. Take the inducer of each power separately, including \(\mathbf1\) of conductor one. Write \(v_+=\max(v,0)\), let \(\Lambda\) be the von Mangoldt function and \(\gamma\) Euler's constant. For \(x\ge1\) put
+\begin{align*}
+ A_\chi(x)&=\sum_n\Lambda(n)\chi(n)(x/n-1)_+,\\
+ G_{\mathbf1}(x)&=A_{\mathbf1}(x)-x\log x+(1+\gamma)x,\qquad
+ G_\chi(x)=A_\chi(x)+x(L'/L)(1,\chi)\quad(\chi\ne\mathbf1),\\
+ G_S(x)&=G_{\mathbf1}(x)+(3o+1)^{-1}\sum_{\chi\in S\setminus\{\mathbf1\}}\Re G_\chi(x).
+\end{align*}
+\begin{lemma}[One-sided windows]\label{lem:landau}
+Fix \(0<\theta<1,\ \delta>0\). If \(G_S(x)\le Cx^\theta\) throughout arbitrarily late intervals \([Y,Y^{1+\delta}]\) with a fixed \(C\), then \(L(s,\chi)\ne0\) for every \(\chi\in S,\ \Re s>\theta\), with \(s=1\) excluded for \(\chi=\mathbf1\).
+\end{lemma}
+\begin{proof}
+Extend \(g=G_S\) by zero below \(1\). Its Mellin transform \(\int_1^\infty g(x)x^{-s-1}\,dx\) converges absolutely for \(\Re s>1\). A ramp transforms to \(n^{-s}/[s(s-1)]\). The Euler products and the centring above cancel the poles at \(1\), using \(-\zeta'/\zeta=(s-1)^{-1}-\gamma+O(s-1)\). On \(\Re s>0\) the remaining poles are simple, exactly at family zeros. At \(\rho\) the residue is \(-m_S(\rho)/[\rho(\rho-1)]\), where \(m_S\) sums the zero multiplicities with the displayed positive weights. Here \(S\) and the weights are invariant under conjugation. Real poles lie in \((0,1)\) and have positive residue.
+
+Suppose the supremum \(B\) of the real parts of the poles exceeds \(\theta\). Choose \(\theta<\alpha<B\), let \(r\) be the residue at \(B\) (zero if regular), and choose \(t>0\) with \(B\pm it\) regular. On \(x\ge1\) set
+\[
+ h(x)=g(x)-x^\alpha-rx^B(1-\cos(t\log x)),
+\]
+and put \(h=0\) below \(1\). The Mellin integral of the real function \(h\) converges absolutely sufficiently far right. Its continuation adds
+\(-1/(s-\alpha)-r/(s-B)+\tfrac r2\{(s-B-it)^{-1}+(s-B+it)^{-1}\}\)
+to the transform of \(g\). It is meromorphic on \(\Re s>0\) and regular at \(B\) and to its right. If \(r>0\) the two new nonreal poles preserve the supremum \(B\). If \(r=0\) the poles with real part \(>\alpha\) are untouched, even if the supremum is never attained. The oscillation theorem of Kaczorowski and Pintz~\cite[Cor.~1 and (2.2)]{kp} gives a sign change on every sufficiently late \([T^{1-e},T]\) for fixed \(0<e<1\). Take \(T=Y^{1+\delta}\) and \(e=\delta/(1+\delta)\). On the selected windows \(h\le Cx^\theta-x^\alpha<0\), a contradiction. The cosine argument is also used in~\cite[\S5]{three}. Here the pointwise window bound applies directly.
+\end{proof}
+
+\section{Auxiliary primes and Fourier projection}\label{sec:fourier}
+Fix \(0<\epsilon<1/52\). Given \(Z\le X\), put \(z=Z^{\epsilon/5}\). A good pair consists of primes \(q\equiv3\bmod8\) and \(d\equiv7\bmod16\), prime to \(M\), with
+\[
+ z/2<\log q\le z,\qquad z(\log Z)^2/2<\log d\le z(\log Z)^2.
+\]
+Both \(q\) and every odd prime \(p\le z\) divide \(d+1\). For \(\xi\bmod M\) and \((i,j)\in\{0,1\}^2\setminus\{(0,0)\}\), the primitive inducer \(\chi\) of \(\xi(\cdot/q)^i(\cdot/d)^j\) must satisfy \(|G_\chi(y)|\le y^{1/2+\epsilon/2}\) and \(|(L'/L)(1,\chi)|\le4\log y\) for \(Z\le y\le X\). Twists of real primitive characters of conductor dividing \(8M\) must in addition be zero-free in \(\Re s>1-1/400,\ |\Im s|\le Q_j\), with \(Q_j=8M e^z\exp(jz(\log Z)^2)\).
+
+For fixed \(A\ge1\) the good-pair lemma supplies a pair on \([Z,Z^A]\) for all sufficiently large \(Z\). Its mean-square estimate expands the square of the ramped Mangoldt sums over prime twists. Reciprocity reduces off-diagonal terms to odd squarefree kernels of products \(nn'\) up to the square of the cutoff. The diagonal, even powers, primes dividing the progression modulus and one exceptional kernel are counted separately. For twist coefficients of modulus at most one, with \(s_p=\sum_{p^j\le N}\Lambda(p^j)\min(1,y/p^j)\le B\), \(R_R\) the total weight on even powers or primes dividing the modulus, and \(S_1\) the total weight, the second moment per prime is at most \(\sum_ps_p^2+R_R^2+2B^2+2BR_R+\eta S_1^2\). The primes in the average lie in a coprime class modulo a multiple of eight, exceed \(N^2\), and their other squarefree character sums are bounded by \(\eta\) times the size of the prime set. For \(Q\ge3\) the zero-density bound removes \(O(Q^{1/4})\) primes \(q\) for which a primitive character of conductor \(f'q\le Q\), \(f'\le F<q\), has a zero with \(\Re s>1-1/400,\ |\Im s|\le Q\). Together with nonvanishing near \(1\) for bounded conductors, this retains an arbitrarily large proportion, first of admissible \(q\), then of admissible \(d\) for each retained \(q\). See \paperpage{7}{source Lemma 3.2} for the uniform estimates.
+
+At the layer \(e\), take the cyclotomic subfield fixed by units \(v\) satisfying
+\[
+ v\equiv\pm1\bmod 2^{e+2},\qquad\psi(v)=1,\qquad (v/q)=(v/d)=1.
+\]
+It is abelian CM, contains \(K=\QQ(\sqrt{-d})\), and has group \(A=(\ZZ/2)^2\times H\), \(n=|H|\). Write \(c=((1,1),0)\) for complex conjugation, \(\Phi=\ker\chi_K\) for the CM type, \(f=|\Phi|=2n\), and \(a(h)=((1,0),h)\). The shifts form \(H_0\subset H\), with \(H/H_0\) cyclic of order \(o\). There are tops \(T\subset H\), \(n_T=|T|\), lengths \(|a_t/b-x|\le1\) with \(a_t\le a^+\ll xb\), bulk indices \(T_2\subset H_0\) of density \(\delta_2=n_2/n\), and weight scale \(b=\exp(x^\epsilon)\). Spacing uses a Behrend set~\cite{behrend} \(B\subset[0,n/(4L))\) of size at least \((n/L)\exp[-C\sqrt{\log n\log(2L)}]\). The forbidden relation is \(j(s_2-s_1)=i(s_3-s_1)\) for distinct \(s_1,s_2,s_3\in B\) and distinct nonzero \(i,j\) with \(|i|,|j|\le L\). In base \(b_1>4LD\) a relation lifts without carries to digit vectors in \(\{0,\ldots,D-1\}^\nu\). One sphere contains at least \(D^\nu/(1+\nu(D-1)^2)\) such vectors and no collinear triple. Taking \(b_1^\nu\le n/(4L)\) and balancing the two losses gives the stated size, using a singleton for the small cases. A translate of \(B\) meets at most two positions in any \(L+1\) consecutive steps of a progression with step of order \(>L\). Three positions would give an integer collinearity since both sides of the congruence have absolute value \(<n/4\). For a step of order at most \(c_0\), if \(c_0s<n\) for \(s\in B\), two hits have the same orbit point.
+
+For \(\omega\notin\Phi\), its partner at top \(t\) is \(\pi_t(\omega)=c+\omega+((0,0),t)\). At an unramified \(p\), \(\Dsum(a,t,w)\) contains \(2\log p\,(a/p^i-w(\pi_t(i\Frob_p)))_+\) for \(i\Frob_p\notin\Phi\), precisely the odd powers at inert primes. At \(d\) sum over all \(1\le i\le N_{\rm cut}\), using coefficient \(\log d\) and the unique element outside \(\Phi\) in \(i\Frob_d+I_d\), where \(I_d=\{0,a(0)\}\). Other ramified primes make no contribution under the source's inertia conditions. The cutoff covers every \(a/w(\rho)\). Write
+\[
+ \Msum(a,w)=a\left(\log a-1-\gamma+(L'/L)(1,\chi_K)-f^{-1}\sum_{\rho\in\Phi}\log w(\rho)\right).
+\]
+For \(\xi\in\widehat A\), \(G_\xi\) uses its primitive Dirichlet inducer. Character orthogonality gives
+\[
+ \Dsum(a,t,w)-\Msum(a,w)=
+ f^{-1}\!\!\sum_{\omega\notin\Phi,\ \xi\in\widehat A}
+ \overline{\xi(\omega)}\, w(\pi_t(\omega))G_\xi\!\left(a/w(\pi_t(\omega))\right).
+\]
+The coefficients are \(|A|/f=2\) at unramified primes and \(2/|I_d|=1\) at \(d\). The two centring contributions are those of \(\mathbf1\) and \(\chi_K\).
+
+At shift \(u_0\) the bulk labels are \(((0,1),s+u_0)\), \(s\in T_2\). Replace their weights by \(b\) and discard the light labels. The source assumes \(b\le w\le b+\eta+1\) on the bulk, \(0<w\le2b'\) elsewhere, \(b'X'\le xb\), \(|G_\xi(y)|\le\vartheta y\) for \(y\ge X'/3\), and the weight Lipschitz bound \(3a|v-v'|/\min(v,v')\) for \(vG_\xi(a/v)\). With \(x\ge3\), \(2f(x+1)\vartheta\le1/x\) and \(6f(x+1)(\eta+1)\le b/x\), the bulk term minus the actual term in real part costs at most
+\(2f[3(x+1)(\eta+1)+(x+1)b\vartheta]\le2b/x\) per stage and top. Averaging over \(H_0\) keeps \(A_0=H_0^\perp\), of size \(4o\), with coefficient \(b\delta_2/2\). For a coset \(c\in H/H_0\), write \(N_T(c)\) for its top count and \(\lambda(c)=(3+\mathbf1_{c=0})/(3o+1)\). The hypothesis is
+\[
+           |N_T(c)-n_T\lambda(c)|\le n_Tx^{-1+\epsilon}.
+\]
+The Fourier coefficients of \(\lambda\) are \(1\) and \(1/(3o+1)\) for the trivial and nontrivial characters. For family characters the phase \(\xi(a(t))\) depends only on the coset. Summing the error in the counts and changing \(a_t/b\) to \(x\) with the logarithmic-derivative bounds gives, for all sufficiently large \(x\),
+\[
+ \sum_{t\in T}\Re\sum_{\xi\in A_0}\xi(a(t))G_\xi(a_t/b)
+ \ge n_T\bigl(G_S(x)-\Sigma_{\rm aux}-4x^{1/2+\epsilon}\bigr),
+ \qquad \Sigma_{\rm aux}=\sum_{\rm aux}|G_\xi(x)|\le4o x^{1/2+\epsilon}.
+\]
+
+Now sum over tops and all \(m\) stages, using \(\Dsum(u_0),\Msum(u_0)\) for the totals. A common upper bound \(E_*\) for \(\Dsum(u_0)-\Re\Msum(u_0)\) at every required shift gives
+\begin{equation}\tag{A}\label{eq:A}
+ \frac{n_Tmb\delta_2}{2}\bigl(G_S(x)-\Sigma_{\rm aux}-4x^{1/2+\epsilon}\bigr)
+ \le E_*+\frac{2n_Tmb}{x}.
+\end{equation}
+\section{Theta lifts, the terminal period and its lattices}\label{sec:theta}
+At each shift take the source's finite family \(\mathcal W(u_0)\) of chains between definite unitary groups. The \(j\)-th rank is \(N(j)=k+j(\tau+1)\), with \(\tau\) odd and \(\tau\le x^{400}\). For ranks \(v\le v'\), \(t_0=v'-v\), \(z\in\mathbb C^\times\) and a Satake parameter \(\alpha\) with \(\lfloor v/2\rfloor\) entries, the following is a multiset identity
+\[
+ (-1)^v{\rm BC}_{v'}(\theta_{v,v'}(\alpha))
+ =(-1)^{v'}{\rm BC}_{v}(\alpha)\ \sqcup\
+ \{z^{1-t_0+2i}:0\le i<t_0\}.
+\]
+At \(z=q_v^{1/2}\) the last segment is that of the trivial representation of \({\rm GL}_{t_0}\). The two signs record the splitting characters~\cite{rallis2,hks}.
+
+The terminal period is a Bessel pairing~\cite{ggp} for \(U(k+r,r+1)\) and the Bessel subgroup \(U(k)\ltimes N\), with \(N\) the unipotent radical. Here \(r\) counts hyperbolic planes. In \paperpage{13}{source Lemma 4.2}, \(k\ge2\), two negative vectors \(z,z'\) and a smooth section on \(|\zeta|^2>T(z)T(z')\) are fixed, \(T(z)=-h(z,z)\). The section preserves the middle Hermitian form and pairs the two vectors to \(\zeta\). Both compact parameter lists \(u,u'\) strictly interlace the first \(k\) entries of a common supplied list \(\lambda^{(0)}\). Extend by \(U_{i+1}=u_i,\ U'_{i+1}=u'_i\) for \(0\le i<k\). At successive prescribed entries integrality in \(\ZZ+(k-1)/2\) and the common strict interlacing give \(\max(U_{i+1},U'_{i+1})+1\le\min(U_i,U'_i)\) for \(1\le i<k\). The place datum realizes both vectors and compact representations, the compact probability measures, the standard measure on \(N\), and the supplied section. The interlacing hypothesis concerns \(\lambda^{(0)}\) independently of the discrete-series parameter. Applying Kudla's two-step seesaw relation~\cite{seesaw} successively, with the last-step relation as base and rapid decay for the integrations, leaves one terminal Bessel period for the whole chain.
+
+The comparison of theta integrals uses admissible triples. At the base, \(E/F\) is CM, \(E/\QQ\) Galois and \(\mathcal O_E/\mathcal O_F\) unramified. The additive character is standard and unramified at the designated finite places and the inert places, which are nondyadic of norm \(>3\). The ranks satisfy \(a'<a\), \(a+a'\) even and \(2(p+q)+1<\min(\lfloor(a-a')/2\rfloor,a')\). The signatures are \((a-p,p),(q,a'-q),(a+a'-p-q,p+q)\) for the two Hermitian spaces and the skew-Hermitian one. The good Schr\"odinger models use splitting pairs \((\beta,\beta/\alpha)\), \((\alpha,\alpha/\beta)\). The restrictions of \(\alpha,\beta\) are the \(a'\)-th and \(a\)-th powers of the quadratic character of \(E/F\). At every infinite place \(w\) the signed inequality is \(m_\alpha(w)-m_\beta(w)>a+a'\). Both are unramified outside \(T'=S_0\sqcup Q\) in the prescribed finite set, \(\nu=\alpha/\beta\) is ramified above \(T'\), and the auxiliary place outside \(T'\) splits completely.
+
+The quotient maps have common nonzero irreducible targets. At infinity they are onto on polynomial Fock vectors, kill the derivatives for their respective unitary groups and are invariant under the corresponding maximal compact subgroups. Equality of images is preserved under the derived and compact \(U(W)\) actions. The finite maps are onto, kill their augmentation spaces and are compatible with \(U(W)\). The vacua have equal nonzero images outside \(T'\). At \(T'\), equality of local zeta integrals characterizes matching in the prescribed models.
+
+Polynomial matching is equality of the two finite sums of tensor images, with vacuum factors outside a finite set. Full matching requires fixed finite factors, convergent polynomial approximants, and membership of both the primed limit and each primed approximant sum in the prescribed Schwartz space. For fixed maps one nonzero \(c\) works for every matched pair, \(I_V(\varphi)=cI_{V'}(\varphi')\). A nonzero primed integral gives uniqueness. Both integral constructions converge on their prescribed domains. The primed kernel has rapid decay in the integration variable with polynomial growth in the other, and the primed integral has moderate growth. At the good places the primed map has kernel equal to the augmentation subspace, is onto on the prescribed local vectors, and every functional annihilating the augmentation subspace factors through it. The source invokes meromorphic continuation of the Siegel Eisenstein series against growth-bounded functionals and the definite doubling Siegel--Weil formula for \(K\)-finite input~\cite{sw,rallis}. At \(s_0=(m_0-n_0)/2\) the multiplier is \(1\) if \(n_0<m_0\), and \(2\) otherwise.
+
+In the two plane removals write \(F_z=\nu(\mathfrak b)^{e_1}\nu(\mathfrak b')^{e_2}\prod_{v\in T'}\nu_v(e_3)\varepsilon(\psi_v,\nu_v,z)\). Each step has its own uniform signs. After the two real quotient maps and the adapted plane decompositions are fixed, \(C\ne0\) is independent of the characters and matched finite data. For removal from \(V'\), of ranks \(b'+2,b'\), fix \(V,p\), put \(q_1+1=q\), and use adapted indices \((0,b'+1)\) in \(V'\) and \((a,a+b'+1)\) in \(W\). This gives \(cL^{S_0}(h+1,\nu)=c_1/(CF_{-h})\), \(h=\lfloor(a-b'-2)_+/2\rfloor\). For removal from \(V\), fix \(V'\), take \(q=q_1=0,\ p_1+1=p\), and use indices \((0,b'+1)\) in both decompositions. Then \(c=CF_{1-h}L^{S_0}(h,\nu)c_1\), \(h=\lfloor(b'+2-a')_+/2\rfloor\). For the full quotient and level conditions see the \paperpage{14}{matching and Bessel interface}.
+
+Fix \(u_0\). The row lattice \(R\) of test vectors is common to all \(u\in\mathcal W(u_0)\). Write \(N^0_u\) for the primitive column lattice, \(M_u\) for its reference lattice and \(N_u=I_uN^0_u\) for the shifted one. With the source's rational normalization the period gives \(B_u:N_u\to R^\vee\). For \(B_u\ne0\), \(h_u\) bounds the mean over infinite places of \(\log\|B_u\|_{v,\mathrm{op}}^2\) in the frame metrics. The zero-map branch is handled separately in the source comparison.
+
+\section{Local divisibility and the retained gain}\label{sec:div}
+For a coefficient place \(w\mid p\), put \(\lambda_w=e_w\log N\mathfrak p_w/[F_{\rm coeff}:\QQ]\), so \(\sum_{w\mid p}\lambda_w=\log p\). Let \(g_{j,w}\) be the stage gain, \(g^D_{j,w}\) its retained part (zero at excluded primes), \({\rm pc}_w\) the primitive correction, and \(c_{j,w},c'_{u,j,w}\) the finite corrections. Define
+\begin{align*}
+ \Gain&=2\sum_w\lambda_w\left(\sum_j g^D_{j,w}-{\rm pc}_w\right),&
+ C&=2\sum_{j,w}\lambda_wc_{j,w},&
+ C'(u)&=2\sum_{j,w}\lambda_wc'_{u,j,w},\\
+ \sigma_w&=e_w\sum_j(g^D_{j,w}+c_{j,w}-c'_{u,j,w}),&
+ I_u&=\prod_w\mathfrak p_w^{-\lfloor\sigma_w\rfloor}.
+\end{align*}
+A nonzero local pairing of valuation \(\ge\sigma_w\) remains integral after scaling by \(\varpi_w^{-\lfloor\sigma_w\rfloor}\). The comparison matrices identify the test lattices with the row images, so the signed shifts glue into \(R^\vee\).
+
+The construction has two prime cutoffs \(X'<X''\) and two local lower bounds. At an ordinary inert prime the partner after \(e\) steps has displacement \(eh_p\) and parity zero. At a signal prime the same displacement has parity \(e\bmod2\). The orbit steps are \(h_p,2h_p\), respectively, and the labelled periods are \(n_p=\ord h_p,\,2\ord(2h_p)\). For tops \(s\) in an orbit \(O\), put \(a'_s=a_s-2c_G\), \(W_{se}=w_j(\pi_p(s,e))-[k+(2j-1)(\tau+1)]/2+c_G\). If \(V_p\) is the set of even-offset tops and \(d_p(O)\) the digit correction, the two counts are
+\begin{align*}
+ g_j^{\rm base}(O)&=\sum_{s\in O\cap T}\ \sum_{e\ {\rm allowed}}(a'_s/p^e-W_{se})_+-d_p(O),\\
+ g_j^{\rm Hk}(O)&=\frac{p}{p^2-1}\sum_{s\in O\cap T}a'_s
+ -\sum_{s\in(O\cap T)\setminus V_p}\ \sum_{e>0\ {\rm odd}}\min(a'_s/p^e,W_{se})-d_p(O).
+\end{align*}
+The basic sum runs over positive odd \(e\), omitting first hits of a different top with parity zero. The digit cost is \(K_1n_pN(m)^2\log_p(2a)+K_2|O\cap T|(\log_p(2a))^2\). Service is restricted to good orbits at eligible ordinary inert \(p<X'\) with \(\ord h_p\ge x^{\epsilon/4}\), outside the excluded band when \(p\ge p_0(k)\), and requires \(m\sum_{\rm good}\kappa_v(O)\le x^{-\epsilon}\). A served orbit contributes \(\max(0,g_j^{\rm base},g_j^{\rm Hk}-{\rm Pr}_j)\). An unserved orbit contributes \((g_j^{\rm base})_+\). If \(p>X''\) or \(p\) is ordinary inert with \(h_p=0\), the gain is zero.
+
+For the served set \(\mathcal V\), \({\rm pc}_w=0\) if \(\mathcal V=\varnothing\). Otherwise it equals \(e_p+m\sum_{O\in\mathcal V}(\lceil t_v(O)\rceil_++D_p^{\rm rk}+1)\). Here \(p^{e_p}M^{\rm na}\subset M_{\rm loc}\subset M^{\rm na}\), \(t_v\) is the orbit scale and \(D_p^{\rm rk}\) the rank defect. The allowance \({\rm io}_w\) is zero without service. Otherwise it is
+\(2m(\sum_{\rm good}\kappa_v(O))\max_{O\in\mathcal V}S_v(O)\), with
+\(S_v(O)=\lceil\sum_j(g_j^{\rm Hk}(O)-{\rm Pr}_j(O)-(g_j^{\rm base}(O))_+)_+\rceil\).
+
+At \(g_0,g_1\) the common correction \(c_j(p)\) is minus half the Fock degree. Write \(w_{j,\varepsilon,h}=w_j((0,\varepsilon),h)\). The other nonzero branches are
+\[
+ c_j(p)=
+ \begin{cases}
+ -\tfrac{k-1}{2}\sum_{h\in H}\min(w_{j,0,h},w_{j,1,h}), &p=d,\\
+ \sum_{\rho\in\Phi}(k-1)w_{j,\rho}/(p^2-1), &p\le X''\text{ ordinary inert},\ h_p=0,\\
+ n_p^{-1}\sum_{z\in\Phi}{\rm FOrb}_j(p,z), &\text{remaining eligible inert or signal }p\le X''.
+ \end{cases}
+\]
+Here \({\rm FOrb}_j(p,z)\) is the linear-program optimum in the \(n_p\) weights \((k-1)w_j({\rm pos}_p(z,s))\). For the chain correction \(c'_{u,j,w}\) the level \(T_u\) has its own term. Away from \(T_u\) write \(D_\Gamma\) for a common multiple of stabilizer orders. At \(g_i=\pi_i\bar\pi_i\) the formula is
+\[
+ v_{g_i}(D_\Gamma)+{\rm FTG}(j)
+ +e_w^{-1}\sum_\rho\!\left(\sum_{a<N(j-1)}\nu_{u,j,\rho,a}\right)v_w(\rho(\bar\pi_i))
+ +c_g\big(fN(m)^2+m^2\eta_{\rm Sz}\big),
+\]
+where \({\rm FTG}(j)\) is the Fock-degree term and
+\(\nu_{u,j,\rho,a}=\lambda^{\rm src}_{u,\rho,a}+e_{j,\rho}-(N(j-1)+N(j)-1-2a)/2\).
+The source weights and the remaining \(d\)- and inert-prime corrections are those of \paperpage{20}{source \S5.2}.
+
+The local valuation assertion is made on the served sublattice of the integral module \(M_{\rm loc}\). For \(C_s\subset\mathcal V\), let \(y_{C_s}\) be the ordered composition of the \(m\)-fold normalized Hecke iterates on \(C_s\). The served lattice \(N_p\) is the intersection of \(p^{\lceil{\rm pc}_w\rceil}M_{\rm loc}\), the ramified submodule \(V_{\rm ram}\) and the span of all
+\(y_{C_s}(p^{\sum_{O\in\mathcal V\setminus C_s}\lceil S_v(O)\rceil}F)\), \(F\in M_{\rm loc}\).
+The orbit representatives must occupy distinct local positions and the orbit lengths, top positions, lengths and weights in the local model must be those of this chain. Its \(m\)-step image on \(N_p\) has valuation at least
+\(\lceil v_{\rm loc}(p)\sum_j(g_{j,w}+c_{j,w}-c'_{u,j,w})\rceil\).
+Moreover \(N_p\subset p^{\lceil{\rm pc}_w\rceil}(M_{\rm loc}\cap V_{\rm ram})\), and the length of \((M_{\rm loc}\cap V_{\rm ram})/N_p\), divided by \(v_{\rm loc}(p)\), is at most the rank times \({\rm pc}_w+{\rm io}_w\).
+The formal-group logarithm is \(\sum_{i\ge0}y^{p^{2i}}/p^i\). The jet factorization takes the form \(U\exp(\pm\beta)\), or \(U\exp(\pm\beta/2)\) at a signal site, with \(U\) a power series with integral coefficients and \(\beta\) subject to the formal jet conditions. Away from \(T_u\) the reference colength obeys the same normalized bound and vanishes if there is no service. At \(T_u\) the column data supply inclusion and a normalized colength bound of rank times \(\lambda_T(u)\). Where the level is unseen the reference and level lattices agree.
+
+Write \(V_{jt}(p)\) for the sum of \((a_t/p^i-w_j(\pi_t(i\Frob_p)))_+\) over positive odd \(i\). For \(p\le X''\) of either class, \(T_w=T\) at signal primes or \(p\ge X'\), and consists of served tops otherwise. Source Lemma 5.2 gives \(0\le g_{j,w}\le4|T|a/p\) and
+\[
+ \sum_{j,t\in T_w} V_{jt}(p)-m|T_w|\,{\rm lo}(p)-m\,{\rm fl}(p)
+ \le\sum_jg_{j,w}-{\rm pc}_w .
+\]
+Here and below \(\sum_{j,t\in U}\) runs over every stage and \(t\in U\). The Hecke estimate pays the primitive cost on served orbits. The basic estimate pays for rounding, excluded hits and digits on other counted orbits. The term \({\rm lo}(p)\) includes weight spread, Hecke normalization and the odd-power tail. The digit loss is \({\rm fl}(p)=C_f f[N(m)^2\log_p a+(\log_p a)^2]\). Put \(D_p=\sum_{j,t\in T}V_{jt}(p)\) and \(L_p=\sum_{j,t\notin T_w,\ t\in T}V_{jt}(p)+m|T_w|{\rm lo}(p)+m{\rm fl}(p)\). Summation of the local bound gives
+\begin{equation}\tag{B}\label{eq:B}
+ \Dsum(u_0)-\Gain\le 2\sum_{p\ {\rm ret}}\log p\,L_p+
+ 2\sum_{p\ {\rm drop}}\log p\,D_p+\sum_{j,t}\mathfrak d_{jt}.
+\end{equation}
+The last term is the ramified contribution at \(d\). The full statistic is lost at a dropped prime. Both the prime deficit and the total unserved allowance must be bounded at each required shift.
+
+\section{Archimedean heights and cancellation of the target slope}\label{sec:height}
+On an isotypic component the Rallis factor~\cite{rallis} at \(v\mid\infty\) is \(\kappa_v\prod_{j=1}^m\lambda_{j,v,\pi}>0\). For \(B_u\ne0\),
+\[
+ \log\|B_u\|_{v,\mathrm{op}}^2
+ \le h_P+h_{\rm col}(v)-\log\kappa_v-\min_\pi\sum_j\log\lambda_{j,v,\pi}.
+\]
+The unfolding supplies one \(h_P\), whereas the column heights and local factors sum over lifts. The common \(\kappa_v\) is compared at positive dimension and positive row rank. The determinant of the Gram matrix is the squared norm of the top wedge, giving the covolume change between the Petersson and frame metrics.
+
+The row and column counts are, respectively,
+\[
+ D_*=\operatorname{vol}(Y_{\rm row})\,{\rm idx}_{\rm row}\prod_\rho d_\sigma(\rho),
+ \qquad d_{u,*}=\operatorname{mass}(U_k)\,{\rm idx}_{\rm col}\prod_\rho\dim V(u_\rho).
+\]
+Harish-Chandra formal degrees and Weyl dimensions give the products~\cite{mass}. Under the gaps the formal degree is bounded below by \((1-\epsilon_0)\dim V(\lambda_{\rm row})\), with an upper estimate from the lowest compact type and a weight factor. For \(X_u=(D_*/d_{u,*})^{1/(fk)}\), the prime level is chosen near \(X_u\Gamma_u^{-2/(fk)}\). The cost \(2\log\Gamma_u/(fk)\) is included in \(\Delta_{\rm cnt}\) below. For \(K\) of discriminant \(-d\), \(d>4\), Chowla--Selberg in the ideal-lattice normalization \(\Delta(\ZZ+\ZZ z)=(2\pi)^{12}\eta(z)^{24}\) gives~\cite{cs}
+\[
+ h_K^{-1}\!\sum_{[\mathfrak a]}\log\!\left((N\mathfrak a)^6|\Delta(\mathfrak a)|\right)
+ =12\log(2\pi)-6\log d+6\gamma-6(L'/L)(1,\chi_K).
+\]
+Comparing first the ideal-lattice discriminants with the period pairs, then their geometric mean with the scaled torus metric, gives
+\[
+ \log\Omega=\gamma+\log(\pi/c_\infty)-(L'/L)(1,\chi_K).
+\]
+The base determinant leaves \(((2j-m-1)w_{j,\rho}-\delta_{j,\rho})\log\Omega\). Although \(\sum_j(2j-m-1)=0\), the weighted term needs the bound \(|2j-m-1|\le m\) and the stage-correction bounds. It enters the per-lift error, alongside a shared height cost \(n_TaL_a\) paid once.
+
+Set \(A_*=\sum_t a_t,\ V_u=\log T_u,\ L_a=\log(a\,{\rm rd}_E),\ \lambda_{\rm aux}=\log(g_0g_1)\), where \(g_0,g_1\) are the auxiliary levels. Define
+\begin{align*}
+ S_{\rm div}&=m\sum_ta_t(\log a_t-1-\log\Omega),&
+ \Delta_{\rm cnt}&=C_{\rm cnt}L_a(1+m^2/k),\\
+ C_0&= f^{-1}\sum_{j,\rho}\log(w_{j,\rho}c_\infty/\pi)+m\lambda_{\rm aux}.
+\end{align*}
+For the same datum the source gives
+\[
+ \mu(R^\vee)+h_u-C\le S_{\rm div}-A_*V_u+\Err_{\rm div},\quad
+ C_0-\Delta_{\rm cnt}\le V_u\le C_{\rm cnt}mx^\epsilon,\quad
+ |C'(u)-mA_*\lambda_{\rm aux}|\le C_E m B_0 .
+\]
+For example, at the split levels \(g_i=\pi_i\bar\pi_i\) the local row-weight valuation averages to \(\frac12\log g_i\) for each embedding. The normalization and the other finite corrections are included before centring. Substitution gives the exact identity \(S_{\rm div}-A_*C_0+mA_*\lambda_{\rm aux}=\Msum(u_0)\) by cancellation of the \(\log(\pi/c_\infty)\) and level terms. Using the lower bound for \(V_u\) gives
+\[
+ \mu(R^\vee)+h_u-C+C'(u)\le \Re\Msum(u_0)+E_h,\qquad
+ E_h=\Err_{\rm div}+A_*\Delta_{\rm cnt}+C_E m B_0 .
+\]
+
+For a lattice \(L\) of positive rank, \(\mu(L)=-\log\operatorname{covol}(L)/\operatorname{rk} L\). The exterior-power bound for an injection~\cite{bost} is \(\mu(L)\le\mu_{\max}(L')+\log\|i\|\). The logarithm of a full-rank index is the difference of log covolumes. The source applies the signed-index calculation of \S\ref{sec:div} with the primitive and reference colength estimates to obtain
+\[
+ \mu(N_u)\ge\mu(M_u)+\Gain+C-C'(u)-\Err_{\rm lg}(u),\qquad
+ \mu_{\max}(N_u)\le\mu_{\max}(M_u)+\Gain+C-C'(u)+C_{\rm Sl}mB_0 .
+\]
+Take the rank-weighted mean \(\bar\mu=\av_u(\mu(N_u)-h_u)\) and set \(\Upsilon=\max_u(\mu_{\max}(N_u)-h_u)-\bar\mu\). For the source family with positive ranks, \(\bar\mu-\mu_{\min}(R^\vee)\le H_*\), \(H_*>0\), \(0\le\delta_*<1,\ \eta_*\ge0,\ 0\le e_*\le1/4\), its averaged slope estimate is \(\bar\mu-L_{\rm sl}\le\mu(R^\vee)\), with
+\[
+ L_{\rm sl}=\log|\mathcal W(u_0)|+
+ \frac{4\Upsilon\log(1+H_*/\Upsilon)+(\eta_*+4\sqrt{e_*})H_*}{1-\delta_*}.
+\]
+Use the limiting value at \(\Upsilon=0\). Across all required shifts one has \(\delta_*\le\bar\delta<1,\ \eta_*\le\bar\eta,\ e_*\le\bar e\le1/4\), and the construction bounds \(H_*\le x^{C_{\rm HH}}b\). In particular the same positive \(1-\bar\delta\) bounds the denominator from below. Subtract \(h_u\) in the lower slope bound, insert the centred height, and average. The slope of precisely the same target \(R^\vee\) occurs on both sides, giving
+\begin{equation}\tag{C}\label{eq:C}
+ \Gain-\Re\Msum(u_0)\le L_{\rm sl}+E_h-\av_u(\mu(M_u)-\Err_{\rm lg}(u)).
+\end{equation}
+Controlling \(\Upsilon\) uses the separate pairwise bound
+\(\left|(h_u+A_*V_u)-(h_{u'}+A_*V_{u'})\right|\ll |T|aL_a+mB_0\),
+the variation of \(C'\), and the base-slope and \(H_*\) bounds.
+\section{Balancing the costs}\label{sec:balance}
+With \(f=2n,\ n_2=|T_2|,\ \delta_2=n_2/n\), put
+\[
+ B_0=2nmbx^\epsilon,\qquad N_c=\frac{n_2kb x^{2\epsilon}}{n^2},\qquad
+ \mathcal B=n_Ta^+(1+m^2/k)+m(B_0+N_c).
+\]
+The construction requires
+\[
+ a^+\ll xb,\quad n_T\ge \tfrac12nx^{-\epsilon/8},\quad
+ \delta_2\ge x^{-\epsilon},\quad xm\le k\le n^2x^{1/2-\epsilon},\quad
+ x^{1/2-\epsilon}\le m\le x^{1/2+\epsilon/2}.
+\]
+Combining \eqref{eq:B} and \eqref{eq:C} with the spread, loss and base-slope estimates bounds \(E_*\) by \(x^{C\epsilon}\mathcal B\), uniformly in the shift. Divide \eqref{eq:A} by \(n_Tmb\delta_2/2\). In order, \(n_Ta^+\), \(n_Ta^+m^2/k\), \(mB_0\), \(mN_c\) and \(2n_Tmb/x\) contribute at most
+\[
+ x^{O(\epsilon)}\left(\frac{x}{m},\ \frac{xm}{k},\ m,\ \frac{k}{n^2},\ \frac1x\right)
+\]
+term by term. In particular \(n_2\) cancels in the fourth entry. The first is at most \(x^{1/2+\epsilon}\) before its indicated loss, the second at most \(1\), and \(m\le x^{1/2+\epsilon/2}\). A shared charge of order \(x\) and a per-lift charge of order \(m\) thus give the balance \(m\asymp x^{1/2+O(\epsilon)}\). It suffices to bound the exponent by \(1/2+C_\psi\epsilon\) with \(C_\psi\) independent of \(\epsilon\) and \(x\). The release gives \(e_D+e_L+7=9\) for \(e_D=2,\ e_L=0\), comprising \(5\epsilon\) in the bracket, \(3\epsilon\) in projection and \(\epsilon\) to absorb constants and the auxiliary twists. On a realized window this gives \(G_S(x)\le x^{1/2+9\epsilon}\).
+
+\section{The cohomological bound on a common window}\label{sec:torsion}
+For \(\ell\) prime and \(r\ge1\), the full group needed in the index comparison is
+\[
+ \Sha_\ell(E,r)=\ker\!\left[H^1(G_{E,S_\ell},\QQ_\ell/\ZZ_\ell(-r))
+       \longrightarrow\prod_{w\mid\ell}H^1(E_w,\QQ_\ell/\ZZ_\ell(-r))\right].
+\]
+Here ramification is allowed above \(\ell\) and at infinity. For odd \(\ell\), or for totally imaginary \(E\), Poitou--Tate duality~\cite{nsw} identifies its length with that of the localization kernel in \(H^2(G_{E,S_\ell},\ZZ_\ell(r+1))\). Write \(V_\ell=(\log\ell)\sum_{1\le r<\tau}\len_{\ZZ_\ell}\Sha_\ell(E,r)\).
+
+\paragraph{From congruences to the height budget.}
+Let \(\mathcal O_i\) be the coefficient ring, finite over \(\ZZ_\ell\). Divide \(\mathcal O_i\)-lengths by \(\len_{\mathcal O_i}(\mathcal O_i/\ell\mathcal O_i)\) and denote the result by \(\len^\circ\). For a selected eigensystem \(\pi\), let \(v_i(\pi)=\len^\circ(\mathcal O_i/\mathfrak c_\pi)\), with \(\mathfrak c_\pi\) the congruence ideal cut out by the complementary systems. The admissibility hypotheses of source Lemma 8.1 include its Fontaine conditions, integral local duality, coefficient and cyclotomic inertia compatibility, semisimple decomposition and class-field bound. It requires \(\ell\ne g_0,g_1\), finite \({\rm Sel}_\pi\) and finite \(\Sha_\ell(E,r)\) for \(0<r<\tau\). With row and column sets \(R_i,C_i\), one has
+\begin{align*}
+ v_i(\pi)\ \le{}&
+ \sum_{w\in R_i\cup C_i}\len_w+\len^\circ({\rm Sel}_\pi)
+ +\sum_{0<r<\tau}\len_\ell\Sha_\ell(E,r)+v_\ell(h_E)\\
+ &+\tau c_B\!\sum_{w\in R_i}([E_w:\QQ_p]+2)
+ +4n_V(|C_i|+1)\nu_i+\tau |C_i|h_0
+ +\tau\sum_{v\in Q_i}\len^\circ(\mathcal O_i/(\zeta_{iv}-1)).
+\end{align*}
+Here \(h_E\) is the class number, \(n_V\) the representation rank, \(p\) the prime below \(w\), and \(c_B\) a fixed local bound. The term \(\len_w\) uses the lift exponent at a column place and the row bound elsewhere. With fixed \(s_0\), \(\nu_i=\sum_{0<r<\tau}(s_0+v_\ell(r))\), and \(h_0\) is the maximal normalized length of the column invariants for \(0<r<\tau\) (zero for an empty set). The last sum uses the values on the chosen inertia generators at the distinguished places. A Hecke-commuting endomorphism acting by a nonzero integer \(A_0\) on the eigenspaces in \(Z'\subset Z_i\) and by zero on those in \(Z_i\setminus Z'\) bounds the upper/lower lattice colength by
+\(\sum_{\pi\in Z'}{\rm mult}_i(\pi)(v_i(\pi)+v_\ell(A_0))\). This accounts for multiplicities before summation. Summing the twisted-place defects with the same weights as the lattice indices gives \({\rm Def}(j)=\sum_{w\ {\rm twisted}}\lambda_w\,{\rm def}_j(w)\). With the common base dimension \(d_0(j)=D_0\), source Lemma 8.3 gives
+\[
+ {\rm Def}(j)\le d_0(j)\left[C\{fmbx^{2\epsilon}+(\log x)^2N_c\}+\sum_\ell V_\ell\right].
+\]
+It applies to the admitted family at sufficiently large \(x\), with all relevant groups finite and \(\sum_\ell V_\ell\) convergent. The desired bound \(\sum_\ell V_\ell\le\sqrt b\) makes this \(O(d_0(j)x^\epsilon(B_0+N_c))\).
+
+\paragraph{The torsion window.}
+Fix \(\psi,\epsilon\) and a layer function \(x^{2+8\epsilon}\le2^{e(x)}\le2x^{2+8\epsilon}\). There exist \(J\ge1,X_0\) such that for every \(X\ge X_0\) and every prime pair satisfying the congruences and size conditions of \S\ref{sec:fourier} at \(Z=X^{1/J}\), some \(W\ge X^{1/J}\) has \(W^2\le X\) and the following property. For every \(y\in[W,W^2]\), every host \(E\) at layer \(e(y)\), and \(t=\lfloor y^{401}\rfloor\), the groups below are finite and for every finite set of primes \(P\)
+\begin{equation}\label{eq:sha}
+ \sum_{\ell\in P}(\log\ell)\sum_{1\le r<t}\len_{\ZZ_\ell}\Sha_\ell(E,r)\le\exp(y^\epsilon/2).
+\end{equation}
+Nonnegativity allows all primes in the sum. The working modulus is \(f_E=\operatorname{lcm}(2^{e+2},M)qd\). The prime sizes imply \(\log(qd)\le X^{\epsilon/(4J)}\) and \(q,d>2X^{401}+1\) eventually.
+
+For odd \(\ell\) split by complex conjugation with signs \((-1)^r,(-1)^{r+1}\). When \(\ell\nmid [E:\QQ]\), restriction gives
+\(e_{\mathcal O}\len_\ell\Sha_\ell(E,r)^+\le\sum_{\xi(-1)=(-1)^r}\len_{\mathcal O}\Sha_\ell(\xi,r)\)
+over a coefficient ring containing the character values. These character classes over \(\QQ\) have coefficients \((\operatorname{Frac}\mathcal O/\mathcal O)(\xi^{-1}\chi_{\rm cyc}^{-r})\), are locally trivial at primes dividing \(\ell f_E\), and unramified elsewhere. For \(\ell\mid[E:\QQ]\) there is an additional comparison loss at odd primes dividing \(o\). For the opposite sign, Stickelberger annihilation bounds tame components by valuations of the denominated generalized Bernoulli numbers \(B^{\rm prim}_{r+1,\xi}\). The separate wild estimate costs \(O(\ell[E:\QQ]^2(r+1)\log^2(r\ell f_E))\) per bad prime and twist. Summation gives \(T_-\ll\exp(8y^{\epsilon/4})\).
+
+For the first sign define
+\[
+ X_\psi=\{3\}\cup\{\ell\text{ odd prime}:\ell\mid oMp_*h_*p_1\}.
+\]
+Here \(p_*\ge7\) is the least prime \(3\bmod4\) prime to \(M\), \(h_*=h(K_*)\) for \(K_*=\QQ(\sqrt{-p_*})\), and \(p_1\) is the least prime \(1\bmod o_{\rm odd}\) prime to \(2Mp_*\). Fix an admitted host of modulus \(N=f_E\), an odd prime \(\ell\), and a host character \(\xi\) with \(\xi(-1)=(-1)^r,\ 1\le r<t\). For a finite length put \(z_\ell(\xi,r)=(\log\ell)\len^\circ\Sha_\ell(\xi,r)\). As in the source, \(\xi_P\) is the prime-to-\(\ell\) part with its \(\ell\)-component removed. Let \(b=c_2(\xi)\) be the dyadic conductor exponent and \(a\) the order of the prime-to-\(\ell\) part with its 2-component removed. Write
+\[
+ f_0=\ord_{\operatorname{lcm}(4,a)}(\ell),\quad n_0=v_2(\ell^{f_0}-1),\qquad
+ R_1=16o(\ell M)^2\,4^{n_0}.
+\]
+
+\begin{countlemma}[Conductor and symplectic estimates]\label{lem:symplectic}
+Under the arithmetic inputs of the source, \(\Sha_\ell(\xi,r)\) has finite length and \(z_\ell(\xi,r)\le(\ell Nr)^{C_\psi}\) in each of the following ranges:
+\begin{enumerate}
+\item \(2^b\ge R_1\), for every odd \(\ell\) and every \(1\le r<t\). The sum of these terms over all \(r<t\), host characters in the plus part and any finite set of odd primes is at most \((Nt)^{C'_\psi}\).
+\item \(\ell\notin X_\psi,\ \ell-1\mid 2r,\ \xi\ne1\), or \(\ell\in X_\psi,\ r\ge2,\ 2\mid\ord(\xi_P)\). One power \(D\ll_\psi N\ell^3\) supplies the dyadic roots for both symplectic constructions, uniformly in \(\xi,r\).
+\end{enumerate}
+\end{countlemma}
+\begin{proof}
+For the first range, \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/UnitaryThreeDeformations/HostDataOf.lean}{9}{20}{the Gaussian host-data lemma} requires only the displayed threshold, the host and parity conditions, \(\ell\) odd and \(r\ge1\). Fix \(\QQ(i)\) first. For every such datum the reduced \(U(3)\) lift, rigidity and the Gaussian counting estimate give a finite family with trace-difference valuation sum \(s\) and an integer \(v\) satisfying
+\[
+ \len_{\mathcal O}\Sha_\ell(\xi,r)\le v\le 2e_{\mathcal O}s,\qquad
+ s\log\ell\le(\ell Nr)^C .
+\]
+The constant is fixed for the Gaussian field. These are the \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/CountVOf.lean}{35}{60}{steps of the proof of V} after the host data have been supplied. The integer bound gives finiteness. Dividing by the coefficient ramification index \(e_{\mathcal O}\) gives \(z_\ell\le2(\ell Nr)^C\). Since \(\ell^2\le R_1\le2^b\le N\), at most \(N\) primes contribute. There are at most \(\varphi(N)\le N\) characters per prime and twist. Thus their total is at most \((N^2t)^{C+2}\le(Nt)^{2C+4}\), uniformly in the finite prime set.
+
+In the second range, nonexceptional resonance implies \(\ell\ge5,\ r\ge2,\ \xi_P=\xi\). Its nontrivial even and odd orders give II and III, while the exceptional range is II. The host gives \(a\mid2o,\ \ell\nmid a\), hence \(f_0\mid\varphi(4o)\). Choose \(u=\pm\ell\equiv1\bmod4\). Since \(\ell^{f_0}\equiv1\bmod4\), \(u^{f_0}=\ell^{f_0}\). An odd power preserves \(v_2(u-1)\), and each subsequent squaring adds one. Consequently \(2^{n_0}\le2^{v_2(\varphi(4o))}(\ell+1)\). The \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean}{221}{225}{native levels} round up \(\max(\ell N4^{n_0},64\,2^b o\ell^3 M^2)\) in II and \(\max(\ell M p_1 4^{n_0},8\ell^2)\) in III to powers \(2^n\). As \(2^b\le N\), both divide the least power \(D\ge B_\psi N\ell^3\) for a sufficiently large fixed \(B_\psi\). Apply this bound after adjoining \(\mu_D\). The character orders, parity and local components are preserved by inclusion. \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/CoefIndep.lean}{68}{77}{Finiteness and normalized length descend}.
+
+Keep \(P=1\) in II and the auxiliary character of order \(\ord\xi\) at \(P=p_1\) in III. With the original density, rigidity and residual Bernoulli inputs, the Siegel congruence of eigenvalue \(p^{r+1}z_1+p^rz_2+pz_3+1\) gives finiteness and the \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/CountS.lean}{14}{18}{preliminary count}
+\[
+ z_\ell(\xi,r)\le2Ck[L(r+1)]^A\log p,\qquad
+ k=2o(\ell-1)2^n,\quad L=\ell\,2^nNP .
+\]
+Any prime divisor \(p\) of \(6\ell Np_1+1\) is at least five and avoids both native levels and their bad primes. For \(X=\ell Nr\), \(k,L(r+1)\ll_\psi X^4\) and \(\log p\ll_\psi X\). Absorb the constant in \(O_\psi(X^{4A+5})\) using \(X\ge3\). Outside \(X_\psi\) there are only primes \(\ell\le2r+1\) in this second range, so its sum is polynomial in \(Nt\).
+\end{proof}
+
+\paragraph{The remaining inputs.}
+In I, \(\ell\notin X_\psi,\ \ell-1\nmid2r\). Here \(\ell\nmid\ord\xi\), the local order at \(\ell\) is at most two, \(\ell\nmid|\operatorname{disc}K_*|h_*\), \((\operatorname{disc}K_*,N)=1\), and \(K_*\not\subset\QQ(\mu_\ell)\QQ(\xi_P)\). For \(p\nmid30N|\operatorname{disc}K_*|\), let \(\sigma\) be arithmetic Frobenius above \(p\), and \(t_\Psi\) the trace of \(\Psi\oplus1\oplus\Psi^{-1}\) at \(\sigma^{-1}\), where \(\Psi=\chi_{\rm cyc}^r\xi\) on \(G_{K_*}\). The admissible representations come from \(U(3)\) of weight \((r,0,-r)\) and level \(N\), or from newforms of weight \(2r+1\) and level \(N|\operatorname{disc}K_*|\). If all their traces differ from \(t_\Psi\), a finite pairwise nonisomorphic subfamily \(\mathcal X\) gives
+\(\len^\circ\Sha_\ell(\xi,r)\le2\sum_{\rho\in\mathcal X}v_\ell(\operatorname{tr}\rho(\sigma^{-1})-t_\Psi)\).
+This uses the source's Kato input for \(W\otimes\varphi\), where \(W\chi_{\rm cyc}^{-r}\) comes from a newform of weight \(2r+1\) and \(\varphi\) factors through a cyclotomic extension, together with automorphy, rigidity and adjoint lifting~\cite{kato}.
+
+For a fixed kernel \(H'\), the congruence integer \(N_{p,H'}\ne0\) has
+\(\log|N_{p,H'}|\ll\varphi([(\ZZ/N)^\times:H'])(N(r+1))^A\log p\).
+The sum of normalized lengths on a relevant orbit is at most \(2v_\ell(N_{p,H'})\) for \(\ell\ne p\). Take two distinct admissible test primes below \(q,d\), fixed in terms of \(\psi\). For each orbit use this estimate on the finite set of primes with a remaining low-conductor term. Positivity bounds that subsum by the full orbit sum. The product formula bounds the low terms after summation over the kernel orbits. Adding the first bound of Lemma~\ref{lem:symplectic} gives I's polynomial total on every finite prime set. In Z, \(\ell\notin X_\psi,\ \ell-1\mid2r,\ \xi=1\) still gives the stronger conclusion \(\Sha_\ell(\mathbf1,r)=0\).
+
+For the two comparisons at \(\ell\in X_\psi\), restriction to their splitting fields \(L\supset\QQ(\mu_\ell)\) and the local-invariant loss give
+\(\len^\circ\Sha_\ell(\xi,r)\le\len_\ell\Sha_\ell(L,r)+2[L:\QQ]Nr\).
+In IV, \(r\ge2\) and \(\ord(\xi_P)\) is odd. Then \(\operatorname{cond}\xi\mid M\), so \(L=L_{j_0}\) can be taken above \(\QQ(\mu_{\ell M})\), with \([L:\QQ]\le\ell M\ell^{j_0}\). The summed loss is polynomial in \(Nt\). The layer length is retained. In V, \(r=1\). Equality \(2^b=R_1\) belongs to the Gaussian branch. Below the threshold \(\ord\xi\le2o\,2^b\), and \([L:\QQ]\le\ell\ord\xi\ll_\psi\ell^5\) by the dyadic estimate. These primes lie in a fixed finite set and \(\log|D_L|\le[L:\QQ]\log(\ell N)\). Duality and the base bound below give the pointwise polynomial estimate also on this branch.
+
+\paragraph{The towers and the interval selection.}
+For an abelian field containing \(\mu_\ell\) (respectively \(\mu_4\) if \(\ell=2\)), the Ferrero--Washington input~\cite{fw} bounds \(\#(\mathrm{Cl}/\mathrm{Cl}^\ell)\le\ell^{R}\) uniformly on its cyclotomic layers. The release obtains this form by embedding into cyclotomic fields of bounded relative degree, controlling the minus and ambiguous classes, and descending. The dyadic sign requires a separate estimate. The split unramified Iwasawa module then has a bounded number \(R_\ell\) of \(\ZZ_\ell\)-generators. For odd \(\ell\in X_\psi\) the base is fixed. At \(2\) a uniform generator bound transfers from the field of \(\psi\) with \(i\) adjoined to its compositum with \(\QQ(\sqrt{-q},\sqrt{-d})\). The field and its exceptional twists can vary with \(q,d\). For some dyadic layer \(m'\le e(y)+2\) one has \(\len\Sha_2(E,r)\le1+\len\Sha_2(L_{m'},r)\).
+
+For layer \(m'\), choose a fixed \(j_0=\lfloor\log_\ell R_\ell\rfloor+3\) using a positive generator bound. Duality gives the twisted cokernel of \(\gamma^{\ell^{m'}}-1\). If \(S\) lifts the action at \(j_0\) and \(u\) is the corresponding cyclotomic unit, \(\det(u^r S-1)=\prod_i(u^rz_i-1)\) supplies \(R'\le R_\ell\) centres \(s_i\in\ZZ_\ell\). The source's tower estimate is
+\[
+ (\forall i,\ |r-s_i|_\ell\ge\ell^{-\beta})\quad\Longrightarrow\quad
+ \len\Sha_\ell(L_{m'},r)\le R'(\max(m',j_0)+c_0+\beta).
+\]
+At every twist the length is also bounded by the ambient \(H^2\) length at \(j_0\), plus \(R_\ell\max(m'-j_0,0)\). For a totally complex \(L\) containing \(\mu_\ell\) (or \(\mu_4\) at \(2\)), the ambient group is finite and satisfies
+\[
+ \log\#H^2(G_{L,S_\ell},\ZZ_\ell(r+1))
+ \le\exp\!\big((2r[L:\QQ])^{C_{\rm coh}}\log(2|D_L|)\big).
+\]
+Take \(\beta=\lfloor\log_\ell\lfloor X^{401}\rfloor\rfloor\). Within \(1\le r\le\lfloor X^{401}\rfloor\), at most one integer per centre violates the distance bound. Thus their number over the relevant towers is at most a fixed \(R=R_2+\sum_{\ell\in X_\psi}R_\ell\), chosen before the prime pair.
+
+For any \(X>1,\ 0<\alpha\le C_t\) and any set of at most \(R\) exceptional positive integers, put \(\lambda=2C_t/\alpha\). For \(0\le j\le R\) use the log intervals \([U_j,2U_j]\), \(U_j=\log X/(4\lambda^j)\). A twist with \(y^\alpha<r\le y^{C_t}\) on one of them has \(\alpha U_j<\log r\le2C_tU_j\). These half-open ranges are disjoint. One of the \(R+1\) intervals therefore avoids every exceptional twist in that range. With \(J=4\lambda^R\) it gives \([W,W^2]\subset[X^{1/J},X]\). Now take \(C_t=401,\ \alpha=\epsilon/(2C_{\rm coh})\). Nonexceptional twists in the tower estimates have length \(O(\log y)\). The exceptional twists remaining below \(y^{401}\) have \(r\le y^\alpha\). For these twists \((2r[L:\QQ])^{C_{\rm coh}}\ll y^{\epsilon/2}\) and \(\log(2|D_L|)\ll y^{\epsilon/4}\). Their length is \(O(\exp(Cy^{3\epsilon/4}))\). Including the polynomially many twists gives \(T_2\le\exp(y^{4\epsilon/5})\) for the dyadic length total and \(T_+\le(f_E t)^C+C\exp(y^{4\epsilon/5})\). Since \(\log(f_Et)\le2y^{\epsilon/4}\), the sum \((\log 2)T_2+T_-+T_+\) satisfies \eqref{eq:sha} for large \(y\). This is the torsion estimate used in the height comparison.
+
+\section{Assembly and the four conclusions}\label{sec:assembly}
+Choose \(\psi,\epsilon,e(\cdot)\), then \(J,X_0\) for the torsion bound. For large \(X\ge X_0\), apply the good-pair lemma with \(Z=X^{1/J}, A=J\), then choose \(W\) for \emph{that pair}. For the fixed layer constant \(c\ge1\), set \(\lambda_c=c^{1/(2+8\epsilon)}\) and \(Y=\lambda_c W\). At final scale \(Y\le x\le Y^{3/2}\) use the layer \(e(y)\) with \(y=x/\lambda_c\). Once \(W\ge\max(\lambda_c^3,\lambda_c^{400})\), both \(x\) and \(y\) lie in the original good-pair interval, \(y\in[W,W^2]\), and
+\[
+ \tau\le\lfloor x^{400}\rfloor\le\lfloor y^{401}\rfloor,\qquad
+ \sum_\ell V_\ell\le\exp(y^\epsilon/2)\le\exp(x^\epsilon/2)=\sqrt b .
+\]
+Thus all twists used by the chain and every scale used by the analytic argument lie in the ranges just proved.
+
+There is a further joint existence assertion in \paperpage{34}{source Proposition 9.1}. After the rank and height constants are fixed, the formal construction supplies, at every required scale and shift, chains with the specified field, primes, weights, integral pairings, base covolumes and uniform loss estimates \emph{simultaneously}. It calls the local--global Galois row \(h\)~\cite{chenevier,shin}, the local Langlands existence statement~\cite{ht,henniart,scholze}, the two published-result inputs of the release, theta-integral agreement and local matching, the arithmetic-geometric covolume estimate (including principalization, metrics and the Hodge bundle), and the torsion window. In the literature record the same \(h\) occurs twice, and also supplies the row used for the window. Separate existence for each datum would leave this step open. With this cited construction, \eqref{eq:A}--\eqref{eq:C} apply on one interval and \S\ref{sec:balance} gives \(G_S(x)\le x^{1/2+9\epsilon}\) throughout. Since \(Y\ge X^{1/J}\), such intervals start arbitrarily far out.
+
+If a primitive \(L\)-function had a zero of real part \(\beta>1/2\), take \(\psi=\chi\), choose \(1/2<\theta<\min(1,\beta)\), then \(\epsilon>0\) sufficiently small that \(9\epsilon\le\theta-1/2\). Lemma~\ref{lem:landau} with \(\delta=1/2\) excludes that zero. For an induced \(\chi\), every missing Euler factor \(1-\chi^*(p)p^{-s}\) is nonzero for \(\Re s>0\). The right-half-plane assertion excludes the pole of a principal \(L\)-function. Inside the critical strip the gamma factors are finite and nonzero, so the functional equation carries a left-hand zero to a right-hand zero for the dual primitive character. This proves both strip implications. Finally \(\zeta(0)=-1/2\). For \(\Re s<1/2\), put \(z=1-s\). In the functional equation for \(\zeta(1-z)\) the gamma factor is finite and nonzero, and \(\cos(\pi z/2)=0\) in this range only if \(s=0,-2,-4,\ldots\). Every other zero reflects to the excluded half-plane. This yields the four assertions of \S1.
+\appendix
+\section{Correspondence with the source}\label{sec:correspondence}
+The 28 rows retain the original authors' classifications of their own text. They describe its relation to Lean. Section~\ref{sec:analytic} gives a replacement proof. Lemma~\ref{lem:symplectic} reorganizes the cohomological counts using the release's Gaussian and symplectic inputs. The good-pair estimates, local jets, matching and height inputs are used in condensed or cited form. The statement links open the original printed pages. Numbers open the formal source files at the pinned revisions, and letters distinguish disjoint line ranges. F denotes a faithful statement, S a specialization or shorter proof, and \textbf{C} a result cited from the larger construction.
+{\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}p{.395\linewidth}c>{\raggedright\arraybackslash}p{.495\linewidth}@{}}
+\toprule Source statement & Status & Files and lines\\ \midrule\endfirsthead
+\toprule Source statement & Status & Files and lines\\ \midrule\endhead
+\bottomrule\endfoot
+\paperpage{36}{Thm. 1.2, four formal assertions} & F & \mathrange{Mathlib/NumberTheory/LSeries/RiemannZeta.lean}{152}{164}{1}\mapsep \leanrange{src/Statements.lean}{3}{16}{2}\mapsep \leanrange{src/Main.lean}{4}{12}{3} \\
+\paperpage{36}{(2.1), cyclic family} & F & \leanrange{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean}{11}{24}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean}{30}{41}{2}\mapsep \leanrange{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean}{23}{32}{3} \\
+\paperpage{36}{Lem. 2.1, one-sided Landau} & S & \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/CharFamily.lean}{24}{45}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/CharFamilyLFunctionNeZeroOfOneLeRe.lean}{1}{20}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean}{9}{14}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean}{40}{73}{4a}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean}{83}{166}{4b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean}{22}{29}{5a}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean}{145}{155}{5b} \\
+\paperpage{36}{Def. 3.1, Lem. 3.2, good pairs} & F & \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/PairGood.lean}{9}{30}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/MeanSquareBounds/PairShare.lean}{26}{52}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/MeanSquareBounds/PairExists.lean}{9}{40}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/MeanSquareBounds/pairEx.lean}{112}{169}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/MeanSquareBounds/MeanSqAbs.lean}{8}{14}{5}\mapsep \leanrange{src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/MeanSquareHypWIff.lean}{48}{55}{6}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/MeanSquareBounds/CountBadCore.lean}{7}\mapsep \leanrange{src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/CountZAll.lean}{13}{13}{8} \\
+\paperpage{37}{(3.1), \S3.6, field and order of choices} & F & \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean}{19}{49}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/WinPairs.lean}{5}{81}{2}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/CharacterBoxes/TwistForm.lean}{3}\mapsep \leanrange{src/Formalism/LocalRingCardinality/Params.lean}{12}{36}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/SupplyChi.lean}{8}{16}{5} \\
+\paperpage{37}{Lem. 3.3, spacing} & S & \leanrange{src/Formalism/BehrendSets/StatementE.lean}{32}{57}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/WeightVectorSmallSharesSeven.lean}{13}{33}{2} \\
+\paperpage{37}{Def. 3.4, Lem. 3.5, explicit formula} & F & \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{14}{22}{1}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{17}{19}{2a}\,\leanrange{src/Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{60}{105}{2b}\mapsep \leanrange{src/Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{20}{27}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean}{200}{237}{4} \\
+\paperpage{37}{(3.3), Lem. 3.6, Fourier projection} & F & \leanrange{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean}{135}{151}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{26}{63}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{202}{281}{3a}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{343}{364}{3b}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{419}{442}{3c}\mapsep \leanrange{src/Development/AutomorphicArithmetic/PrimitiveCosets/GmAEq.lean}{61}{79}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/PrimitiveCosets/SigALe.lean}{38}{60}{5}\mapsep \leanrange{src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean}{12}{31}{6} \\
+\paperpage{37}{Lem. 3.7, Cor. 3.8, bulk and (A)} & F & \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{16}{20}{1a}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{28}{149}{1b}\,\leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{283}{338}{1c}\mapsep \leanrange{src/Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{20}{27}{2a}\,\leanrange{src/Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{97}{97}{2b}\mapsep \leanrange{src/Formalism/ThickAverageLoss/ThickAverageProofs/ThickAverage.lean}{203}{215}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{26}{54}{4}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/SChain.lean}{50}{51}{5} \\
+\paperpage{38}{Lem. 4.1, Satake parameters} & F & \leanrange{src/Formalism/LocalRingCardinality/Params.lean}{28}{46}{1}\mapsep \leanrange{src/Development/AbelianVarietyTheory/Proofs/TwistedOperators/BaseChangeThetaLiftSatakeParameterEqAddSegment.lean}{22}{25}{2a}\,\leanrange{src/Development/AbelianVarietyTheory/Proofs/TwistedOperators/BaseChangeThetaLiftSatakeParameterEqAddSegment.lean}{108}{116}{2b} \\
+\paperpage{38}{Lem. 4.2, \S4, Bessel data and matching} & \textbf{C} & \leanrange{src/Development/AbelianVarietyTheory/Proofs/JetHarmonics/ExistsPlaceOfLocalBesselDatumInterlacing.lean}{46}{92}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/CuspSpanNormBounds/RelevantZeroGramTerms.lean}{256}{259}{2a}\,\leanrange{src/Formalism/SharpRestriction/CuspSpanNormBounds/RelevantZeroGramTerms.lean}{460}{503}{2b}\mapsep \leanrange{src/Formalism/FormalDegreeBessel/StatementRP.lean}{74}{78}{3}\mapsep \leanrange{src/Development/AbelianVarietyTheory/Definitions/SemilocalFrames/Admissible.lean}{24}{27}{4}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AbelianVarietyTheory/Proofs/JetHarmonics/CapelliParamMemIntAddHalf.lean}{5}\mapsep \leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{231}{241}{6a}\,\leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{342}{395}{6b}\,\leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{431}{470}{6c}\,\leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{491}{510}{6d}\,\leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{559}{600}{6e}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/WeilBound/ThetaLifts/LatticeBasics/HypothesesE.lean}{7}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/WeilBound/ThetaLifts/LatticeBasics/HypothesesS.lean}{8}\mapsep \leanrange{src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/IteratedThetaUnfoldingOfDoubleStepLastTwoSteps.lean}{27}{43}{9}\mapsep \leanrange{src/Formalism/SharpRestriction/Divisibility/FunctionModelRallisFromInputs.lean}{245}{263}{10}\mapsep \leanrange{src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean}{571}{592}{11}\mapsep \leanrange{src/Development/WeilBound/ThetaLifts/Reductions/FiniteClosure/TheoremKOfMod.lean}{22}{27}{12}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalTheoremInputs.lean}{65}{94}{13}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/TieGlobal.lean}{63}{114}{14} \\
+\paperpage{38}{(5.1)--(5.2), Lem. 5.1, division} & \textbf{C} & \leanrange{src/Formalism/LocalRingCardinality/DataParams\%E2\%82\%82.lean}{203}{222}{1}\mapsep \leanrange{src/Formalism/LocalRingCardinality/DataDIVDefs.lean}{12}{24}{2a}\,\leanrange{src/Formalism/LocalRingCardinality/DataDIVDefs.lean}{39}{54}{2b}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/Inputs.lean}{466}{470}{3}\mapsep \leanrange{src/Formalism/LocalToGlobal/IndefiniteForms/IndefUse.lean}{408}{424}{4}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/DivisionHeightBoundStatement.lean}{752}{790}{5}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalTheoremInputs.lean}{77}{89}{6}\mapsep \leanrange{src/Formalism/HarderNarasimhan/StatementPl.lean}{60}{62}{7} \\
+\paperpage{39}{\S5.2, gains and corrections} & F & \leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{97}{106}{1a}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{131}{184}{1b}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{230}{303}{1c}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{341}{374}{1d}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{401}{409}{1e}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean}{418}{472}{1f}\mapsep \leanrange{src/Formalism/SharpRestriction/GrowthBounds/SmallOrderPrimes.lean}{15}{21}{2a}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/SmallOrderPrimes.lean}{50}{54}{2b}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/SmallOrderPrimes.lean}{220}{230}{2c}\mapsep \leanrange{src/Formalism/SharpRestriction/GrowthBounds/FormalGroupSystem.lean}{46}{49}{3a}\,\leanrange{src/Formalism/SharpRestriction/GrowthBounds/FormalGroupSystem.lean}{126}{134}{3b}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/FormalGroupJets.lean}{161}{172}{4}\mapsep \leanrange{src/Formalism/LocalRingCardinality/DataForced.lean}{99}{134}{5}\mapsep \leanrange{src/Formalism/LocalRingCardinality/DataDIVDefs.lean}{62}{72}{6}\mapsep \leanrange{src/Formalism/LocalRingCardinality/DataErr.lean}{22}{24}{7a}\,\leanrange{src/Formalism/LocalRingCardinality/DataErr.lean}{74}{94}{7b}\,\leanrange{src/Formalism/LocalRingCardinality/DataErr.lean}{159}{172}{7c} \\
+\paperpage{39}{Lem. 5.2, local divisibility} & \textbf{C} & \leanrange{src/Formalism/SharpRestriction/GlobalTheoremInputs.lean}{97}{136}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/GrowthBounds/PlaneCountTheoremWithConstants.lean}{718}{809}{2}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/AdmissibleSchurLemma.lean}{53}{56}{3a}\,\leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/AdmissibleSchurLemma.lean}{63}{108}{3b}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/OneLeThresholdMulPowers.lean}{1156}{1179}{4}\mapsep \leanrange{src/Formalism/LocalToGlobal/Columns/ReferenceActionRationalLevels.lean}{86}{106}{5a}\,\leanrange{src/Formalism/LocalToGlobal/Columns/ReferenceActionRationalLevels.lean}{1127}{1136}{5b}\,\leanrange{src/Formalism/LocalToGlobal/Columns/ReferenceActionRationalLevels.lean}{1211}{1218}{5c}\,\leanrange{src/Formalism/LocalToGlobal/Columns/ReferenceActionRationalLevels.lean}{1243}{1246}{5d}\,\leanrange{src/Formalism/LocalToGlobal/Columns/ReferenceActionRationalLevels.lean}{1302}{1307}{5e}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/RecBridge.lean}{327}{339}{6} \\
+\paperpage{39}{Lem. 6.1, Rallis factors} & F & \leanrange{src/Formalism/SharpRestriction/Divisibility/InnerProductFormulaField.lean}{258}{305}{1a}\,\leanrange{src/Formalism/SharpRestriction/Divisibility/InnerProductFormulaField.lean}{509}{524}{1b}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/ConstantGeTwentyEight.lean}{123}{182}{2}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/RecBridge.lean}{161}{171}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RecAtOfGramAt.lean}{17}{43}{4} \\
+\paperpage{40}{\S6.2, dimension count and CM constant} & F & \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/GeneralLinearActions/GapAtLeast.lean}{66}{99}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/StandardLattice.lean}{265}{298}{2a}\,\leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/StandardLattice.lean}{383}{404}{2b}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/TheoremThreeFamilyOfFormalDegreeInput.lean}{170}{175}{3}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/JointsL.lean}{62}{121}{4a}\,\leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/JointsL.lean}{1152}{1161}{4b}\mapsep \leanrange{src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ClassMeanLogNormDiscChowlaSelbergStatement.lean}{9}{10}{5}\mapsep \leanrange{src/Formalism/SharpRestriction/GlobalSchurBounds/Joints.lean}{545}{557}{6}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/NumbersLink.lean}{573}{579}{7}\mapsep \leanrange{src/Formalism/LocalToGlobal/Divisibility/Inputs.lean}{88}{94}{8a}\,\leanrange{src/Formalism/LocalToGlobal/Divisibility/Inputs.lean}{188}{205}{8b} \\
+\paperpage{40}{Lem. 6.2, centred height} & S & \leanrange{src/Formalism/RankGapBounds/MeanBoundSecondForm.lean}{86}{141}{1}\mapsep \leanrange{src/Formalism/RankGapBounds/RankGapProofs/WeightedMeanData.lean}{170}{216}{2}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{105}{111}{3}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{19}{32}{4} \\
+\paperpage{40}{Lem. 6.3, Cor. 6.4, slopes and (C)} & F & \leanrange{src/Formalism/LatticeSlopes/Statement.lean}{66}{88}{1}\mapsep \leanrange{src/Formalism/LatticeSlopes/LatticeSlopesProofs/SlopeInequality.lean}{111}{111}{2}\mapsep \leanrange{src/Formalism/RankGapBounds/MeanBoundSecondForm.lean}{92}{103}{3a}\,\leanrange{src/Formalism/RankGapBounds/MeanBoundSecondForm.lean}{126}{163}{3b}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{50}{197}{4}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/ChainLatticeSizesModelEventually.lean}{279}{299}{5a}\,\leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/ChainLatticeSizesModelEventually.lean}{452}{473}{5b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChTop.lean}{37}{72}{6} \\
+\paperpage{40}{Lem. 7.1, error bracket} & S & \leanrange{src/Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{131}{139}{1}\mapsep \leanrange{src/Formalism/LocalRingCardinality/DataArith.lean}{200}{205}{2}\mapsep \leanrange{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean}{31}{110}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean}{12}{74}{4} \\
+\paperpage{41}{Lems. 8.1--8.2, lattice indices} & \textbf{C} & \leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/DecompositionData.lean}{177}{179}{1a}\,\leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/DecompositionData.lean}{316}{358}{1b}\mapsep \leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/DataN.lean}{25}{33}{2a}\,\leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/DataN.lean}{220}{229}{2b}\mapsep \leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/QuotientHomNonvanishingBound.lean}{395}{406}{3a}\,\leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/QuotientHomNonvanishingBound.lean}{851}{862}{3b}\mapsep \leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/EndomorphismIndexBound.lean}{623}{630}{4} \\
+\paperpage{41}{Lem. 8.3, defect per lift} & \textbf{C} & \leanrange{src/Formalism/SharpRestriction/GlobalTheoremInputs.lean}{18}{64}{1}\mapsep \leanrange{src/Formalism/SharpRestriction/LevelLetterCocycles/ThetaScalarFamilyOfEigenvalue.lean}{30}{51}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/DivinNOfHypV.lean}{76}{129}{3} \\
+\paperpage{41}{(8.1), Lem. 8.4, torsion window} & \textbf{C} & \leanrange{src/Formalism/GaloisCohomology/Statement.lean}{54}{89}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean}{12}{17}{2a}\,\leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean}{39}{49}{2b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean}{25}{34}{3} \\
+\paperpage{42}{\S8.3, decomposition and six cases} & S & \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean}{64}{103}{1a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean}{111}{111}{1b}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean}{127}{128}{1c}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/RedPrime.lean}{11}{15}{2}\mapsep \href{https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/RedAll.lean}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/LayerLe.lean}{10}{15}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/SumOut.lean}{130}{159}{5}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/ZeroMemUnrHom.lean}{79}{115}{6}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/StmtFields.lean}{59}{71}{7}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean}{75}{106}{8a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean}{140}{141}{8b}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean}{164}{164}{8c}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean}{185}{219}{8d}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Cases.lean}{8}{48}{9}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/CharacterLevelBounds/ShaFamMono.lean}{15}{34}{10}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/UnitaryThreeGroups/KatoUse.lean}{12}{64}{11}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/AutomorphicForms/CongruenceNumberRankThree.lean}{121}{140}{12}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Counts.lean}{9}{31}{13a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Counts.lean}{53}{73}{13b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/CountIV.lean}{39}{89}{14}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/IvField.lean}{32}{36}{15}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/CountVs.lean}{86}{87}{16}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/PrimeSetBoundDataOfPrimitiveChar.lean}{12}{94}{17} \\
+\paperpage{43}{Thm. 8.5, Ferrero--Washington} & F & \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/PublishedTheorems/FerreroWashington.lean}{7}{11}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/GaloisLibrary/FerreroWashingtonIndex/FerreroWashington.lean}{18}{102}{2a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/GaloisLibrary/FerreroWashingtonIndex/FerreroWashington.lean}{104}{119}{2b} \\
+\paperpage{43}{Tower estimate, determinant centres} & F & \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/ABoundOfDescends.lean}{17}{20}{1a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/ABoundOfDescends.lean}{30}{55}{1b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/ExistsCentresLevel.lean}{17}{61}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/DetBound.lean}{9}{34}{3} \\
+\paperpage{43}{Lem. 8.6, windows and reassembly} & S & \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/SecondBound.lean}{11}{50}{1}\mapsep \leanrange{src/Formalism/GaloisCohomology/Statement.lean}{80}{80}{2}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/PartA.lean}{24}{78}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/PartB.lean}{50}{70}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/Exc.lean}{7}{16}{5}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/GeneratorCountTuples/LemmaK.lean}{13}{17}{6}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/QuadraticExtensions/IsAlgClosureRat.lean}{69}{110}{7a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/QuadraticExtensions/IsAlgClosureRat.lean}{130}{130}{7b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/Window.lean}{7}{43}{8}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/ThmBabOf.lean}{11}{38}{9a}\,\leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/ThmBabOf.lean}{75}{103}{9b}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Counts.lean}{53}{73}{10}\mapsep \leanrange{src/Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/JointWinOfCounts.lean}{25}{33}{11} \\
+\paperpage{44}{Prop. 9.1, joint realization} & \textbf{C} & \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/ShapeWin.lean}{27}{46}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/DesWin.lean}{11}{35}{2}\mapsep \leanrange{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean}{59}{93}{3}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean}{8}{18}{4}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean}{7}{14}{5} \\
+\paperpage{44}{Prop. 9.2, reflection and all moduli} & F & \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/Imprimitive.lean}{5}{35}{1}\mapsep \leanrange{src/Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean}{7}{73}{2}\mapsep \leanrange{src/Formalism/GammaFactorNonvanishing/CritLine.lean}{6}{32}{3}\mapsep \leanrange{src/Formalism/GammaFactorNonvanishing/RhOfRight.lean}{5}{62}{4}\mapsep \leanrange{src/Supplements/Kernels/MainTheorems.lean}{7}{16}{5} \\
+\end{longtable}}
+The \paperpage{44}{notation concordance, pp.~44--45}, records the remaining local names. In particular, the prime statistic is \texttt{ASK}, the centring term \texttt{MAIN}, and their character identity \texttt{ch\_balance}. The local gain, correction and shifted lattice are \texttt{gain}, \texttt{tau} and \texttt{NuLat}; the height cancellation is \texttt{key\_identity5}. The cohomological bound uses \texttt{VVle} and \texttt{VWinAt}. The joint realization calls \texttt{topDesWin} and \texttt{level\_of\_tiedWin}.
+
+At the top level \(h\) comes from \leanrange{src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean}{1}{8}{the compatibility row}, via the \leanrange{src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TLiftK.lean}{1}{5}{theta lift} and its \leanrange{src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TPGHolds.lean}{51}{58}{Galois input}. The record is \((h,\mathrm{recTExists},h)\). The
+\leanrange{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{215}{218}{assembly hypotheses} and
+\leanrange{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{810}{813}{their application} use the \leanrange{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean}{16}{22}{base covolume}. The final declarations are \texttt{allChi}, \texttt{rhOfAll}, \texttt{critAll} and \texttt{claimAll}.
+
+\paragraph{Attribution.}
+This abridgment adapts \emph{From integral theta periods to Dirichlet GRH: an exposition of Alp\"oge's proof of the Riemann Hypothesis}, credited in the deposit to GPT-6.2 Astra (OpenAI) and Claude Opus 5.5 (Anthropic), \href{https://doi.org/10.5281/zenodo.24413008}{doi:10.5281/zenodo.24413008}, under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}. The text and source table have been condensed. Lemma~\ref{lem:landau} uses a different proof. References [1]--[21] keep the source numbering.
+
+\begin{thebibliography}{23}\small
+\setlength{\itemsep}{1pt}
+\bibitem{alpoge} L. Alp\"oge, \href{https://alpo.ge/remark.pdf}{\emph{Remark on the Riemann Hypothesis}} (2026).
+\bibitem{behrend} F. Behrend, On sets of integers which contain no three terms in arithmetical progression, Proc. Natl. Acad. Sci. USA 32 (1946), 331--332.
+\bibitem{bombieri} E. Bombieri, Counting points on curves over finite fields (d'apr\`es S.~A. Stepanov), S\'eminaire Bourbaki, Exp.~430, Lecture Notes in Math. 383 (1974), 234--241.
+\bibitem{bost} J.-B. Bost, \href{https://www.numdam.org/item/PMIHES_2001__93__161_0/}{Algebraic leaves of algebraic foliations over number fields}, Publ. Math. IH\'ES 93 (2001), 161--221.
+\bibitem{chenevier} G. Chenevier and M. Harris, Construction of automorphic Galois representations, II, Camb. J. Math. 1 (2013), 53--73.
+\bibitem{cs} A. Selberg and S. Chowla, On Epstein's zeta-function, J. Reine Angew. Math. 227 (1967), 86--110.
+\bibitem{fw} B. Ferrero and L. C. Washington, The Iwasawa invariant \(\mu_p\) vanishes for abelian number fields, Ann. of Math. 109 (1979), 377--395.
+\bibitem{ggp} W. T. Gan, B. H. Gross and D. Prasad, \href{https://numdam.org/item/AST_2012__346__1_0/}{Symplectic local root numbers, central critical \(L\) values, and restriction problems in the representation theory of classical groups}, Ast\'erisque 346 (2012), 1--109.
+\bibitem{mass} W. T. Gan, J. P. Hanke and J.-K. Yu, On an exact mass formula of Shimura, Duke Math. J. 107 (2001), 103--133.
+\bibitem{rallis} W. T. Gan, Y. Qiu and S. Takeda, The regularized Siegel--Weil formula (the second term identity) and the Rallis inner product formula, Invent. Math. 198 (2014), 739--831.
+\bibitem{ht} M. Harris and R. Taylor, \emph{The Geometry and Cohomology of Some Simple Shimura Varieties}, Ann. of Math. Stud. 151 (2001).
+\bibitem{hks} M. Harris, S. S. Kudla and W. J. Sweet, Theta dichotomy for unitary groups, J. Amer. Math. Soc. 9 (1996), 941--1004.
+\bibitem{henniart} G. Henniart, Une preuve simple des conjectures de Langlands pour \({\rm GL}(n)\) sur un corps \(p\)-adique, Invent. Math. 139 (2000), 439--455.
+\bibitem{kato} K. Kato, \(p\)-adic Hodge theory and values of zeta functions of modular forms, Ast\'erisque 295 (2004), 117--290.
+\bibitem{seesaw} S. S. Kudla, Seesaw dual reductive pairs, Progr. Math. 46 (1984), 244--268.
+\bibitem{sw} S. S. Kudla and S. Rallis, A regularized Siegel--Weil formula: the first term identity, Ann. of Math. 140 (1994), 1--80.
+\bibitem{nsw} J. Neukirch, A. Schmidt and K. Wingberg, \emph{Cohomology of Number Fields}, 2nd ed., Grundlehren Math. Wiss. 323 (2008).
+\bibitem{rallis2} S. Rallis, Langlands' functoriality and the Weil representation, Amer. J. Math. 104 (1982), 469--515.
+\bibitem{scholze} P. Scholze, The local Langlands correspondence for \({\rm GL}_n\) over \(p\)-adic fields, Invent. Math. 192 (2013), 663--715.
+\bibitem{shin} S. W. Shin, Galois representations arising from some compact Shimura varieties, Ann. of Math. 173 (2011), 1645--1741.
+\bibitem{stepanov} S. A. Stepanov, On the number of points of a hyperelliptic curve over a finite prime field, Izv. Akad. Nauk SSSR Ser. Mat. 33 (1969), 1171--1181.
+\bibitem{kp} J. Kaczorowski and J. Pintz, \href{https://doi.org/10.1007/BF01949062}{Oscillatory properties of arithmetical functions, I}, Acta Math. Hungar. 48 (1986), 173--185.
+\bibitem{three} twinheterodox, \href{https://hexagonmath.org/pdf/2611.00828v1}{Three simplifications in the Alp\"oge--Claude argument for Dirichlet GRH}, \S5, Hexagon 2611.00828v1 (2026).
+\end{thebibliography}
+\end{document}
